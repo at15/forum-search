@@ -1,2 +1,16 @@
 # forum-search
-craw and search forum, store data in hadoop
+
+爬取论坛数据, 存储在hadoop中, 进行分词和索引, 提供web界面用于搜索
+
+项目主要分成以下几个部分
+
+- crawler 按时爬取论坛数据
+- uploader 将爬虫爬到的数据上传到hdfs
+- indexer 分词, 生成索引, 存储到hdfs(?hbase)中
+- manager 调度crawler, uploader, indexer
+- manager ui, 显示crawler, uploader, indexer的状态
+- search api 提供搜索的restful api
+- search ui 提供搜索界面
+
+- ui 部分为spa(单页应用), 通过ajax调用api, api设置CORS
+- manger 和 search 使用 dropwizard
