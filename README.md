@@ -2,6 +2,8 @@
 
 爬取论坛数据, 存储在hadoop中, 进行分词和索引, 提供web界面用于搜索
 
+## 组成
+
 项目主要分成以下几个部分
 
 - crawler 按时爬取论坛数据
@@ -12,5 +14,10 @@
 - search api 提供搜索的restful api
 - search ui 提供搜索界面
 
-- ui 部分为spa(单页应用), 通过ajax调用api, api设置CORS
+### 各部分的细节
+
+- crawler 待定
+- uploader 调用hadoop的api上传
+- indexer 在map reduce里进行分词和索引
 - manger 和 search 使用 dropwizard
+- ui 部分为spa(单页应用), 通过ajax调用api, api设置CORS
