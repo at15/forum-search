@@ -7,8 +7,7 @@
 
 ## 文档
 
-- [传送门](src/site/markdown/index.md)
-- `mvn site:run` 打开浏览器 `localhost:8080`
+- [传送门](doc)
 
 ## 组成
 
