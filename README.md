@@ -5,6 +5,11 @@
 
 爬取论坛数据, 存储在hadoop中, 进行分词和索引, 提供web界面用于搜索
 
+## 文档
+
+- [传送门](src/site/markdown/index.md)
+- `mvn site:run` 打开浏览器 `localhost:8080`
+
 ## 组成
 
 项目主要分成以下几个部分
