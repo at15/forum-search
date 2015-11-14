@@ -17,9 +17,9 @@ public class DiscuzPageProcessor implements PageProcessor {
     private final DiscuzUrl discuzUrl;
     private Site site;
 
-    public DiscuzPageProcessor() {
+    public DiscuzPageProcessor(String baseUrl) {
         site = Site.me().setRetryTimes(3).setSleepTime(1000);
-        discuzUrl = new DiscuzUrl("http://www.1point3acres.com/bbs/");
+        discuzUrl = new DiscuzUrl(baseUrl);
     }
 
     public Site getSite() {
@@ -27,14 +27,20 @@ public class DiscuzPageProcessor implements PageProcessor {
     }
 
     public void process(Page page) {
-        LOGGER.debug(page.getUrl().toString());
+        LOGGER.debug("processing page : " + page.getUrl().toString());
+        // determine the type of this page
+        // TODO
+        // 1. if this is not inner link, ignore it.
+        // 2. if this is a list page, get all the links in this page, and add other pages
+        // NOTE: discuzz will show the total page in the last of pagination
+        // 3. if this is a thread page, abstract the info we need
         for (String l : page.getHtml().links().all()) {
             LOGGER.debug(l);
         }
     }
 
     public static void main(String[] args) throws Exception {
-        Spider.create(new DiscuzPageProcessor())
+        Spider.create(new DiscuzPageProcessor("http://www.1point3acres.com/bbs/"))
                 .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
                 .addPipeline(new ConsolePipeline())
                 .thread(5)
