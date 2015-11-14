@@ -1,5 +1,8 @@
 # forum-search
 
+[![Build Status](https://travis-ci.org/at15/forum-search.svg?branch=master)](https://travis-ci.org/at15/forum-search)
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/790be2c9fe3b469c8a9660c6b8d67a43)](https://www.codacy.com/app/at15/forum-search)
+
 爬取论坛数据, 存储在hadoop中, 进行分词和索引, 提供web界面用于搜索
 
 ## 组成
