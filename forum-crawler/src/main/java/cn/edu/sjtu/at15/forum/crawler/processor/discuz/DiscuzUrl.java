@@ -24,7 +24,8 @@ public class DiscuzUrl {
         return url.startsWith(baseUrl + "/thread-");
     }
 
+    // FIXME: this only works for one url
     public boolean isList(String url) {
-        return false;
+        return url.startsWith(baseUrl + "/forum.php?mod=guide");
     }
 }

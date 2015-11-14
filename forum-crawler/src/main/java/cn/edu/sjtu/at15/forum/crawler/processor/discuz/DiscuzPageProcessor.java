@@ -33,19 +33,30 @@ public class DiscuzPageProcessor implements PageProcessor {
             LOGGER.debug("not inner link : " + currentUrl);
             return;
         }
+
         // determine the type of this page
         if (discuzUrl.isThread(currentUrl)) {
+            LOGGER.debug("processing thread");
             // TODO: parse thread content here
             // in fact we should handle all the comments as well, but this is not so important
             return;
         }
+
         // TODO: 2. if this is a list page, get all the links in this page, and add other pages
         // NOTE: discuzz will show the total page in the last of pagination
         if (discuzUrl.isList(currentUrl)) {
-            // TODO: get all the threads in the list
-            // we don't consider nested list.
-            for (String l : page.getHtml().links().all()) {
-                LOGGER.debug(l);
+            LOGGER.debug("processing list page");
+            // TODO: get all the threads in the list. we don't consider nested list.
+            // since we would need to deal with
+            for (String link : page.getHtml().links().all()) {
+                // ignore outer link
+                if (!discuzUrl.isInner(link)) {
+                    continue;
+                }
+                LOGGER.debug(link);
+                if (discuzUrl.isThread(link)) {
+                    page.addTargetRequest(link);
+                }
             }
             return;
         }

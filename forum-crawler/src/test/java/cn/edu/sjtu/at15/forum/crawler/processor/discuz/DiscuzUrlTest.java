@@ -26,4 +26,12 @@ public class DiscuzUrlTest {
         Assert.assertEquals(discuzUrl
                 .isThread("http://www.1point3acres.com/bbs/thread-147140-1-1.html"), true);
     }
+
+    @Test
+    public void testList() {
+        Assert.assertEquals(discuzUrl
+                .isList("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot"), true);
+        Assert.assertEquals(discuzUrl
+                .isList("http://www.1point3acres.com/bbs/come_on_baby_lets_xx"), false);
+    }
 }
