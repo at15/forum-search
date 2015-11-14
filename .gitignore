@@ -11,3 +11,5 @@ buildNumber.properties
 *.iml
 
 .DS_Store
+
+data/*

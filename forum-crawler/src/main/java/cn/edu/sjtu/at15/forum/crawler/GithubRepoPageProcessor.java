@@ -32,7 +32,7 @@ public class GithubRepoPageProcessor implements PageProcessor {
     public static void main(String[] args) {
         Spider.create(new GithubRepoPageProcessor())
                 .addUrl("https://github.com/code4craft")
-//                .addPipeline(new JsonFilePipeline("/Users/gpl/repos/github.com/at15/forum-search/data"))
+                .addPipeline(new JsonFilePipeline("data/"))
                 .addPipeline(new ConsolePipeline())
                 .thread(5)
                 .run();
