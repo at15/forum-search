@@ -3,6 +3,7 @@ package cn.edu.sjtu.at15.forum.crawler;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.pipeline.JsonFilePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 /**
@@ -27,6 +28,10 @@ public class GithubRepoPageProcessor implements PageProcessor {
     }
 
     public static void main(String[] args) {
-        Spider.create(new GithubRepoPageProcessor()).addUrl("https://github.com/code4craft").thread(5).run();
+        Spider.create(new GithubRepoPageProcessor())
+                .addUrl("https://github.com/code4craft")
+                .addPipeline(new JsonFilePipeline("/Users/gpl/repos/github.com/at15/forum-search/data"))
+                .thread(5)
+                .run();
     }
 }
