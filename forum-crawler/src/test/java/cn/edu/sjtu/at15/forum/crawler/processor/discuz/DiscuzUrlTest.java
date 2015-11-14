@@ -7,10 +7,16 @@ import org.junit.Test;
  * Created by gpl on 15/11/14.
  */
 public class DiscuzUrlTest {
+    private final DiscuzUrl discuzUrl = new DiscuzUrl("http://www.1point3acres.com/bbs/");
+
+    @Test
+    public void testInner() {
+        Assert.assertEquals(discuzUrl.isInner("http://www.baidu.com/ads/123"), false);
+        Assert.assertEquals(discuzUrl.isInner("http://www.1point3acres.com/bbs/forum.php"), true);
+    }
+
     @Test
     public void testThreadUrl() {
-        DiscuzUrl discuzUrl = new DiscuzUrl();
         Assert.assertEquals(discuzUrl.isThread("aaaa"), false);
-        Assert.assertEquals(discuzUrl.isList("aaaa"), false);
     }
 }

@@ -14,10 +14,12 @@ import org.slf4j.LoggerFactory;
  */
 public class DiscuzPageProcessor implements PageProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(DiscuzPageProcessor.class);
+    private final DiscuzUrl discuzUrl;
     private Site site;
 
     public DiscuzPageProcessor() {
         site = Site.me().setRetryTimes(3).setSleepTime(1000);
+        discuzUrl = new DiscuzUrl("http://www.1point3acres.com/bbs/");
     }
 
     public Site getSite() {
