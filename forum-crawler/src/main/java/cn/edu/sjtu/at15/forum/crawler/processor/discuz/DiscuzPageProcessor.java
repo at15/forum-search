@@ -46,24 +46,26 @@ public class DiscuzPageProcessor implements PageProcessor {
         // NOTE: discuzz will show the total page in the last of pagination
         if (discuzUrl.isList(currentUrl)) {
             LOGGER.debug("processing list page");
-            // get the max page
-            // 1. get the div for pagination
-            // 2. get the max page number
-            LOGGER.debug(page.getHtml().css("div.pg>label>span").toString());
+            // get the max page number
+            String pagination = page.getHtml().css("div.pg>label>span").toString();
+            LOGGER.debug(pagination);
+            Integer maxPage = DiscuzStringUtils.getMaxPage(pagination);
+            LOGGER.debug("max page : " + maxPage);
+            // TODO: add all the page links, since webmagic will handle the duplicate url
 
             // loop through all thread links
-//            for (String link : page.getHtml().links().all()) {
-//                // ignore outer link
-//                if (!discuzUrl.isInner(link)) {
-//                    continue;
-//                }
-//                LOGGER.debug(link);
-//                if (discuzUrl.isThread(link)) {
-//                    page.addTargetRequest(link);
-//                }
-//                // we don't consider nested list.
-//                // otherwise we would need to deal with duplicate links and circle refs
-//            }
+            for (String link : page.getHtml().links().all()) {
+                // ignore outer link
+                if (!discuzUrl.isInner(link)) {
+                    continue;
+                }
+                LOGGER.debug(link);
+                if (discuzUrl.isThread(link)) {
+                    page.addTargetRequest(link);
+                }
+                // we don't consider nested list.
+                // otherwise we would need to deal with duplicate links and circle refs
+            }
             return;
         }
     }

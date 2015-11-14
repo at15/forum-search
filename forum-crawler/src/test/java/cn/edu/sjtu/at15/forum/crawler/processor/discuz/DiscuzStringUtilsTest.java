@@ -21,7 +21,7 @@ public class DiscuzStringUtilsTest {
             System.out.println(m.group(2));
         } else {
             System.out.println("not found");
-
         }
+        Assert.assertEquals((long) DiscuzStringUtils.getMaxPage(p), 12);
     }
 }
