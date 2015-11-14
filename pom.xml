@@ -6,7 +6,16 @@
 
     <groupId>cn.edu.sjtu.at15</groupId>
     <artifactId>forum-search</artifactId>
+    <packaging>pom</packaging>
     <version>0.0.1</version>
+
+    <description>
+        craw forum and store data in hadoop, index and provide search
+    </description>
+
+    <modules>
+        <module>forum-crawler</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
