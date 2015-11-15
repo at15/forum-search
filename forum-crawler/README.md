@@ -9,10 +9,12 @@
 
 ## TODO
 
-- [ ] 爬取并存储帖子到本地文件
-- [ ] 分析帖子, 抽取关键信息
+- [x] 爬取
+- [x] 分析帖子, 抽取关键信息
+- [ ] 存储帖子到本地文件
 - [ ] * 获取帖子的评论
 
 ## Working
 
-- [ ] 抓取热门的帖子 http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot
+- [x] 抓取热门的帖子列表的第一页 http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot
+- [x] 抓取单个帖子

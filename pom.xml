@@ -61,6 +61,7 @@
         </dependency>
 
         <!-- hadoop -->
+        <!-- hadoop client -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
@@ -72,7 +73,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
+        <!-- hadoop hdfs -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-hdfs</artifactId>

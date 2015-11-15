@@ -13,3 +13,7 @@ buildNumber.properties
 .DS_Store
 
 data/*
+
+# bundle a hadoop, due to #2
+hadoop-2.7.1
+hadoop-2.7.1.tar.gz
