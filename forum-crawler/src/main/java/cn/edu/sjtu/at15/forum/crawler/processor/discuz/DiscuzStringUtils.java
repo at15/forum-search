@@ -31,13 +31,22 @@ public class DiscuzStringUtils {
         return 0;
     }
 
+    public static String getAuthor(String thread) {
+        Document doc = Jsoup.parse(thread);
+        String author = doc.select("#postlist > div").first()
+                .select("div.authi > a.xi2").text();
+        return author;
+    }
+
     public static DiscuzThread parseThread(Page page) {
         DiscuzThread thread = new DiscuzThread();
         // TODO: parse author, view count, reply count, content
         String title = stripTags(page.getHtml().css("span#thread_subject").toString());
         LOGGER.debug("thread title : " + title);
         thread.setTitle(title);
-        String author;
+        String author = getAuthor(page.getHtml().toString());
+        thread.setAuthor(author);
+        LOGGER.debug("thread author : " + author);
         return thread;
     }
 }
