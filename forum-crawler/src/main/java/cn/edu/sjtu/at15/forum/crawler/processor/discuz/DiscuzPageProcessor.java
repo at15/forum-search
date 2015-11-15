@@ -74,7 +74,8 @@ public class DiscuzPageProcessor implements PageProcessor {
 
     public static void main(String[] args) throws Exception {
         Spider.create(new DiscuzPageProcessor("http://www.1point3acres.com/bbs/"))
-                .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
+//                .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
+                .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
                 .addPipeline(new ConsolePipeline())
                 .thread(5)
                 .run();

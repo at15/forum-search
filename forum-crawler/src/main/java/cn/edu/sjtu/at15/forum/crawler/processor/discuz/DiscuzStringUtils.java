@@ -33,10 +33,11 @@ public class DiscuzStringUtils {
 
     public static DiscuzThread parseThread(Page page) {
         DiscuzThread thread = new DiscuzThread();
-        // TODO: the parse logic here
+        // TODO: parse author, view count, reply count, content
         String title = stripTags(page.getHtml().css("span#thread_subject").toString());
         LOGGER.debug("thread title : " + title);
         thread.setTitle(title);
+        String author;
         return thread;
     }
 }

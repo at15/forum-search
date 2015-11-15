@@ -11,5 +11,12 @@ public class DiscuzThreadTest {
     public void testIsValid() {
         DiscuzThread thread = new DiscuzThread();
         Assert.assertEquals(thread.isValid(), false);
+
+        thread.setTitle("xiaoming");
+        thread.setAuthor("xiaowang");
+        thread.setViewCount(100);
+        thread.setReplyCount(100);
+        thread.setContent("this is some dummy content");
+        Assert.assertEquals(thread.isValid(), true);
     }
 }
