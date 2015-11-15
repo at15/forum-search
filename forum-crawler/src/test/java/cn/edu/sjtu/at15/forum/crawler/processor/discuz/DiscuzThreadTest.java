@@ -16,7 +16,7 @@ public class DiscuzThreadTest {
         thread.setAuthor("xiaowang");
         thread.setViewCount(100);
         thread.setReplyCount(100);
-        thread.setContent("this is some dummy content");
+        thread.setAuthorPost("this is some dummy content");
         Assert.assertEquals(thread.isValid(), true);
     }
 }

@@ -10,14 +10,14 @@ public class DiscuzThread {
     private Integer viewCount;
     private Integer replyCount;
     private String author;
-    private String content;
+    private String authorPost;
 
     public boolean isValid() {
         return (title != null) &&
                 (viewCount != null) &&
                 (replyCount != null) &&
                 (author != null) &&
-                (content != null);
+                (authorPost != null);
     }
 
     public String getTitle() {
@@ -52,11 +52,11 @@ public class DiscuzThread {
         this.author = author;
     }
 
-    public String getContent() {
-        return content;
+    public String getAuthorPost() {
+        return authorPost;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setAuthorPost(String authorPost) {
+        this.authorPost = authorPost;
     }
 }

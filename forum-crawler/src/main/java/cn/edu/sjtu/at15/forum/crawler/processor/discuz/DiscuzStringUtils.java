@@ -54,6 +54,14 @@ public class DiscuzStringUtils {
         return replyCount;
     }
 
+    public static String getAuthorPost(String thread) {
+        // TODO: clear the ads using http://jsoup.org/cookbook/modifying-data/set-text
+        Document doc = Jsoup.parse(thread);
+        String post = doc.select("#postlist > div").first()
+                .select("td.t_f").text();
+        return post;
+    }
+
     public static DiscuzThread parseThread(Page page) {
         DiscuzThread thread = new DiscuzThread();
         // TODO: parse author, view count, reply count, content
@@ -69,6 +77,9 @@ public class DiscuzStringUtils {
         Integer replyCount = getReplyCount(page.getHtml().toString());
         thread.setReplyCount(replyCount);
         LOGGER.debug("thread reply count : " + replyCount);
+        String authorPost = getAuthorPost(page.getHtml().toString());
+        thread.setAuthorPost(authorPost);
+        LOGGER.debug(authorPost);
         return thread;
     }
 }
