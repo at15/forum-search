@@ -38,6 +38,22 @@ public class DiscuzStringUtils {
         return author;
     }
 
+    public static Integer getViewCount(String thread) {
+        Document doc = Jsoup.parse(thread);
+        String count = doc.select("#postlist > table").first()
+                .select("span.xi1").first().text();
+        Integer viewCount = Integer.valueOf(count);
+        return viewCount;
+    }
+
+    public static Integer getReplyCount(String thread) {
+        Document doc = Jsoup.parse(thread);
+        String count = doc.select("#postlist > table").first()
+                .select("span.xi1").get(1).text();
+        Integer replyCount = Integer.valueOf(count);
+        return replyCount;
+    }
+
     public static DiscuzThread parseThread(Page page) {
         DiscuzThread thread = new DiscuzThread();
         // TODO: parse author, view count, reply count, content
@@ -47,6 +63,12 @@ public class DiscuzStringUtils {
         String author = getAuthor(page.getHtml().toString());
         thread.setAuthor(author);
         LOGGER.debug("thread author : " + author);
+        Integer viewCount = getViewCount(page.getHtml().toString());
+        thread.setViewCount(viewCount);
+        LOGGER.debug("thread view count : " + viewCount);
+        Integer replyCount = getReplyCount(page.getHtml().toString());
+        thread.setReplyCount(replyCount);
+        LOGGER.debug("thread reply count : " + replyCount);
         return thread;
     }
 }
