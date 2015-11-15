@@ -59,4 +59,13 @@ public class DiscuzThread {
     public void setAuthorPost(String authorPost) {
         this.authorPost = authorPost;
     }
+
+    @Override
+    public String toString() {
+        return "\ntitle : " + getTitle() + "\n" +
+                "author : " + getAuthor() + "\n" +
+                "view count : " + getViewCount() + "\n" +
+                "reply count : " + getReplyCount() + "\n" +
+                "author post : " + getAuthorPost() + "\n";
+    }
 }

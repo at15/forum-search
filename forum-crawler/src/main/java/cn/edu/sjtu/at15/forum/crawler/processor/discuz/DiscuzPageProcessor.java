@@ -34,12 +34,12 @@ public class DiscuzPageProcessor implements PageProcessor {
             return;
         }
 
-        // determine the type of this page
+        // deal with thread
         if (discuzUrl.isThread(currentUrl)) {
             LOGGER.debug("processing thread");
             DiscuzThread thread = DiscuzStringUtils.parseThread(page);
-            // TODO: parse thread content here
-            // in fact we should handle all the comments as well, but this is not so important
+            page.putField("url", currentUrl);
+            page.putField("thread", thread);
             return;
         }
 

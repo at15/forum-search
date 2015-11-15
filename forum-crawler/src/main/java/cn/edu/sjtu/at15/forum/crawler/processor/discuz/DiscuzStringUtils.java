@@ -62,6 +62,7 @@ public class DiscuzStringUtils {
         return post;
     }
 
+    // TODO: should get all the comments as well, but we don't have much time, so.
     public static DiscuzThread parseThread(Page page) {
         DiscuzThread thread = new DiscuzThread();
         // TODO: parse author, view count, reply count, content
