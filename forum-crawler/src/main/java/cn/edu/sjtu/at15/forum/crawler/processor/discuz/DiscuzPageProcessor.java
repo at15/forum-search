@@ -37,6 +37,7 @@ public class DiscuzPageProcessor implements PageProcessor {
         // determine the type of this page
         if (discuzUrl.isThread(currentUrl)) {
             LOGGER.debug("processing thread");
+            DiscuzThread thread = DiscuzStringUtils.parseThread(page);
             // TODO: parse thread content here
             // in fact we should handle all the comments as well, but this is not so important
             return;
@@ -52,6 +53,7 @@ public class DiscuzPageProcessor implements PageProcessor {
             Integer maxPage = DiscuzStringUtils.getMaxPage(pagination);
             LOGGER.debug("max page : " + maxPage);
             // TODO: add all the page links, since webmagic will handle the duplicate url
+            // TODO: handle maxPage == 0
 
             // loop through all thread links
             for (String link : page.getHtml().links().all()) {

@@ -12,6 +12,14 @@ public class DiscuzThread {
     private String author;
     private String content;
 
+    public boolean isValid() {
+        return (title != null) &&
+                (viewCount != null) &&
+                (replyCount != null) &&
+                (author != null) &&
+                (content != null);
+    }
+
     public String getTitle() {
         return title;
     }
