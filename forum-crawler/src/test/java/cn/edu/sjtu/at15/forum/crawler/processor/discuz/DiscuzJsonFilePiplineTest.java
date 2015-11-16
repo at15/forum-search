@@ -17,7 +17,7 @@ public class DiscuzJsonFilePiplineTest {
         thread.setViewCount(100);
         thread.setReplyCount(100);
         thread.setAuthorPost("this is some dummy content");
-        DiscuzJsonFilePipline pipline = new DiscuzJsonFilePipline("aaa");
-        pipline.write(thread);
+        DiscuzJsonFilePipline pipline = new DiscuzJsonFilePipline("data");
+        pipline.write("a.baidu.com", thread);
     }
 }

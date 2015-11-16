@@ -28,8 +28,12 @@ public class DiscuzJsonFilePipline implements Pipeline {
 
     }
 
-    public void write(DiscuzThread thread) throws IOException {
+    public void write(String url, DiscuzThread thread) throws IOException {
         LOGGER.debug("current directory " + System.getProperty("user.dir"));
-        mapper.writeValue(new File("../data/t.json"), thread);
+        File file = new File(baseFolder + "/" + DiscuzStringUtils.encodeBase64(url));
+        if(!file.exists()){
+            file.createNewFile();
+        }
+        mapper.writeValue(file, thread);
     }
 }

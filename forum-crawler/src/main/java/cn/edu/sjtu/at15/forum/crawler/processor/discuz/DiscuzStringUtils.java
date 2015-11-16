@@ -1,5 +1,6 @@
 package cn.edu.sjtu.at15.forum.crawler.processor.discuz;
 
+import org.apache.commons.codec.binary.Base64;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import us.codecraft.webmagic.Page;
@@ -82,5 +83,13 @@ public class DiscuzStringUtils {
         thread.setAuthorPost(authorPost);
         LOGGER.debug(authorPost);
         return thread;
+    }
+
+    public static String encodeBase64(String str) {
+        return new String(Base64.encodeBase64(str.getBytes()));
+    }
+
+    public static String decodeBase64(String encoded) {
+        return new String(Base64.decodeBase64(encoded));
     }
 }
