@@ -25,6 +25,7 @@
         <junit.version>4.11</junit.version>
         <commons.configuration.version>1.9</commons.configuration.version>
         <hadoop.version>2.7.1</hadoop.version>
+        <jackson.version>2.6.1</jackson.version>
     </properties>
 
     <dependencies>
@@ -78,6 +79,13 @@
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-hdfs</artifactId>
             <version>${hadoop.version}</version>
+        </dependency>
+
+        <!-- json -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
     </dependencies>
 
