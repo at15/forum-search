@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>forum-search</artifactId>
+        <groupId>cn.edu.sjtu.at15</groupId>
+        <version>0.0.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>forum-tokenizer</artifactId>
+
+    <dependencies>
+        <!-- need to use pojo defined in crawler, should have a common module -->
+        <dependency>
+            <groupId>cn.edu.sjtu.at15</groupId>
+            <artifactId>forum-crawler</artifactId>
+            <version>0.0.1</version>
+            <!-- crawler is not needed -->
+            <exclusions>
+                <exclusion>
+                    <groupId>us.codecraft</groupId>
+                    <artifactId>webmagic-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>us.codecraft</groupId>
+                    <artifactId>webmagic-extension</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- tokenizer -->
+        <dependency>
+            <groupId>com.hankcs</groupId>
+            <artifactId>hanlp</artifactId>
+            <version>${hanlp.version}</version>
+        </dependency>
+    </dependencies>
+</project>

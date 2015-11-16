@@ -16,6 +16,7 @@
     <modules>
         <module>forum-crawler</module>
         <module>forum-uploader</module>
+        <module>forum-tokenizer</module>
     </modules>
 
     <properties>
@@ -26,6 +27,7 @@
         <commons.configuration.version>1.9</commons.configuration.version>
         <hadoop.version>2.7.1</hadoop.version>
         <jackson.version>2.6.1</jackson.version>
+        <hanlp.version>portable-1.2.7</hanlp.version>
     </properties>
 
     <dependencies>
