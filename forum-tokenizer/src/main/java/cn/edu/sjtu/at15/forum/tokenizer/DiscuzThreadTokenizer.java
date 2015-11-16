@@ -14,11 +14,17 @@ import java.util.List;
 public class DiscuzThreadTokenizer {
     private static final Logger LOGGER = LoggerFactory.getLogger(DiscuzThreadTokenizer.class);
 
+    public List<Term> segment(String str){
+        return HanLP.segment(str);
+    }
+
     // TODO: what's the difference when call HanLP and StandardTokenizer
+    @Deprecated
     public List<Term> hanlp(String str){
         return HanLP.segment(str);
     }
 
+    @Deprecated
     public List<Term> standard(String str) {
         return StandardTokenizer.segment(str);
     }
