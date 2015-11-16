@@ -30,3 +30,9 @@
 - indexer 在map reduce里进行分词和索引
 - manger 和 search 使用 dropwizard
 - ui 部分为spa(单页应用), 通过ajax调用api, api设置CORS
+
+## 版权
+
+使用了 HanLP 作为分词 https://github.com/hankcs/HanLP
+
+TODO: 其他包的license...
