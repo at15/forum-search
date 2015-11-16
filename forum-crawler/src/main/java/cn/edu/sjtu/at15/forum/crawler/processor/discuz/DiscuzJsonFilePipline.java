@@ -9,6 +9,7 @@ import us.codecraft.webmagic.pipeline.Pipeline;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InvalidObjectException;
 
 /**
  * Created by gpl on 15/11/16.
@@ -24,14 +25,24 @@ public class DiscuzJsonFilePipline implements Pipeline {
 
     public void process(ResultItems resultItems, Task task) {
         DiscuzThread thread = resultItems.get("thread");
-        // TODO: thread logic here
+        try {
+            write(thread);
+        }catch (IOException ex){
+            LOGGER.warn("unable to save thread to file due to ",ex);
+        }
+    }
 
+    public void write(DiscuzThread thread) throws IOException {
+        if (!thread.isValid()) {
+            throw new InvalidObjectException("thread is not valid, lack some attrs like url");
+        }
+        write(thread.getUrl(), thread);
     }
 
     public void write(String url, DiscuzThread thread) throws IOException {
         LOGGER.debug("current directory " + System.getProperty("user.dir"));
         File file = new File(baseFolder + "/" + DiscuzStringUtils.encodeBase64(url));
-        if(!file.exists()){
+        if (!file.exists()) {
             file.createNewFile();
         }
         mapper.writeValue(file, thread);

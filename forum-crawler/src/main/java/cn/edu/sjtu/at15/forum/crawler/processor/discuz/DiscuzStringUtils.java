@@ -66,6 +66,7 @@ public class DiscuzStringUtils {
     // TODO: should get all the comments as well, but we don't have much time, so.
     public static DiscuzThread parseThread(Page page) {
         DiscuzThread thread = new DiscuzThread();
+        thread.setUrl(page.getUrl().toString());
         // TODO: parse author, view count, reply count, content
         String title = stripTags(page.getHtml().css("span#thread_subject").toString());
         LOGGER.debug("thread title : " + title);

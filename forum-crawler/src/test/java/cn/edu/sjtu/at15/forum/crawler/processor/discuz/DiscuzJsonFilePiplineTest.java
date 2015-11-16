@@ -19,5 +19,8 @@ public class DiscuzJsonFilePiplineTest {
         thread.setAuthorPost("this is some dummy content");
         DiscuzJsonFilePipline pipline = new DiscuzJsonFilePipline("data");
         pipline.write("a.baidu.com", thread);
+
+        thread.setUrl("http://www.baidu.com");
+        pipline.write(thread);
     }
 }

@@ -6,6 +6,9 @@ package cn.edu.sjtu.at15.forum.crawler.processor.discuz;
  * pojo for discuz thread
  */
 public class DiscuzThread {
+
+
+    private String url;
     private String title;
     private Integer viewCount;
     private Integer replyCount;
@@ -13,11 +16,20 @@ public class DiscuzThread {
     private String authorPost;
 
     public boolean isValid() {
-        return (title != null) &&
+        return (url != null) &&
+                (title != null) &&
                 (viewCount != null) &&
                 (replyCount != null) &&
                 (author != null) &&
                 (authorPost != null);
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getTitle() {

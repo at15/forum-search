@@ -77,6 +77,7 @@ public class DiscuzPageProcessor implements PageProcessor {
 //                .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
                 .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
                 .addPipeline(new ConsolePipeline())
+                .addPipeline(new DiscuzJsonFilePipline("data"))
                 .thread(5)
                 .run();
     }

@@ -12,6 +12,7 @@ public class DiscuzThreadTest {
         DiscuzThread thread = new DiscuzThread();
         Assert.assertEquals(thread.isValid(), false);
 
+        thread.setUrl("http://www.baidu.com");
         thread.setTitle("xiaoming");
         thread.setAuthor("xiaowang");
         thread.setViewCount(100);
