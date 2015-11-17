@@ -10,4 +10,4 @@ cp config/yarn-site.xml hadoop-2.7.1/etc/hadoop
 cp config/hadoop-env.sh hadoop-2.7.1/etc/hadoop
 echo "start hadoop as daemon"
 hadoop-2.7.1/sbin/start-dfs.sh
-hadoop-2.7.1/sbin/start-yarn.sh
+#hadoop-2.7.1/sbin/start-yarn.sh

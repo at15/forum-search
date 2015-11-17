@@ -5,6 +5,8 @@ import cn.edu.sjtu.at15.forum.tokenizer.TokenInThread;
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.*;
@@ -15,6 +17,8 @@ import java.util.*;
 public class ThreadReducer extends
         Reducer<Text, Text, Text, Text> {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ThreadReducer.class);
+
     public static final String THREAD_SEP = ";;";
     private Text result = new Text();
 
@@ -24,6 +28,7 @@ public class ThreadReducer extends
         Map<String, TokenInThread> urlTokenInThreadMap = new HashMap<String, TokenInThread>();
         String term = key.toString();
         Token t;
+        LOGGER.debug("aaaaa");
         // merge terms in one thread first, this is in fact reducer
         for (Text val : values) {
             // TODO: this will cause error if we have combiner

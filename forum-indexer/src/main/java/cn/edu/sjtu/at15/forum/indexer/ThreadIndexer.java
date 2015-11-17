@@ -54,7 +54,7 @@ public class ThreadIndexer {
             job.setOutputValueClass(Text.class);
             FileInputFormat.addInputPath(job, new Path(inputPath));
             FileOutputFormat.setOutputPath(job, new Path(outputPath));
-            job.submit();
+            job.waitForCompletion(true);
         } catch (IOException ex) {
             LOGGER.error("got io exception for job", ex);
         } catch (ClassNotFoundException ex) {
