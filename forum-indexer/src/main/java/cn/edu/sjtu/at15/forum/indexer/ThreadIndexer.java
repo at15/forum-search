@@ -21,47 +21,14 @@ import java.util.StringTokenizer;
 public class ThreadIndexer {
     private static final Logger LOGGER = LoggerFactory.getLogger(ThreadIndexer.class);
 
-    // use word count for test
-    public static class TokenizerMapper
-            extends Mapper<Object, Text, Text, IntWritable> {
-
-        private final static IntWritable one = new IntWritable(1);
-        private Text word = new Text();
-
-        public void map(Object key, Text value, Context context
-        ) throws IOException, InterruptedException {
-            StringTokenizer itr = new StringTokenizer(value.toString());
-            while (itr.hasMoreTokens()) {
-                word.set(itr.nextToken());
-                context.write(word, one);
-            }
-        }
-    }
-
-    public static class IntSumReducer
-            extends Reducer<Text, IntWritable, Text, IntWritable> {
-        private IntWritable result = new IntWritable();
-
-        public void reduce(Text key, Iterable<IntWritable> values,
-                           Context context
-        ) throws IOException, InterruptedException {
-            int sum = 0;
-            for (IntWritable val : values) {
-                sum += val.get();
-            }
-            result.set(sum);
-            context.write(key, result);
-        }
-    }
-
-    public void run(String inputPath, String outputPath) {
+    public void runWordCount(String inputPath, String outputPath) {
         Configuration conf = new Configuration();
         try {
             Job job = Job.getInstance(conf, "thread indexer");
             job.setJarByClass(ThreadIndexer.class);
-            job.setMapperClass(TokenizerMapper.class);
-            job.setCombinerClass(IntSumReducer.class);
-            job.setReducerClass(IntSumReducer.class);
+            job.setMapperClass(WordCountTokenizerMapper.class);
+            job.setCombinerClass(WordCountIntSumReducer.class);
+            job.setReducerClass(WordCountIntSumReducer.class);
             job.setOutputKeyClass(Text.class);
             job.setOutputValueClass(IntWritable.class);
             FileInputFormat.addInputPath(job, new Path(inputPath));
@@ -69,15 +36,15 @@ public class ThreadIndexer {
             job.submit();
         } catch (IOException ex) {
             LOGGER.error("got io exception for job", ex);
-        } catch (ClassNotFoundException ex){
+        } catch (ClassNotFoundException ex) {
             LOGGER.error("got class not found ", ex);
-        } catch (InterruptedException ex){
+        } catch (InterruptedException ex) {
             LOGGER.error("got interrupted ", ex);
         }
     }
 
     public static void main(String[] args) throws Exception {
         ThreadIndexer indexer = new ThreadIndexer();
-        indexer.run("/user/at15/input","/user/at15/output/1");
+        indexer.runWordCount("/user/at15/input", "/user/at15/output/1");
     }
 }
