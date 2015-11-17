@@ -28,7 +28,7 @@ public class ThreadReducerTest {
         values.add(new Text("http://www.baidu.com;250;1"));
         values.add(new Text("http://www.google.com;250;1"));
         reduceDriver.withInput(new Text("a"), values);
-        reduceDriver.withOutput(new Text("a"), new Text("http://www.baidu.com;500;0,1;;http://www.google.com;250;1"));
+        reduceDriver.withOutput(new Text("a"), new Text("http://www.baidu.com;250;0,1;;http://www.google.com;250;1"));
         reduceDriver.runTest();
     }
 }

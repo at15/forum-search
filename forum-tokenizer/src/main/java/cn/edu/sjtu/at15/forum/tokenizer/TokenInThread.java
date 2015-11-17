@@ -48,7 +48,7 @@ public class TokenInThread {
     public void addToken(Token token) {
         setTerm(token.getTerm());
         setUrl(token.getUrl());
-        setRank(token.getRank() + getRank());
+        setRank(token.getRank());
         positions.add(token.getPosition());
     }
 
