@@ -55,20 +55,9 @@ public class DiscuzThreadTokenizer {
         return tokens;
     }
 
-    // TODO: what's the difference when call HanLP and StandardTokenizer
-    @Deprecated
-    public List<Term> hanlp(String str) {
-        return HanLP.segment(str);
-    }
-
-    @Deprecated
-    public List<Term> standard(String str) {
-        return StandardTokenizer.segment(str);
-    }
 
     public static void main(String[] args) throws Exception {
         DiscuzThreadTokenizer tokenizer = new DiscuzThreadTokenizer();
-        System.out.println(tokenizer.standard("我喜欢吃西瓜"));
-        System.out.println(tokenizer.hanlp("我喜欢吃西瓜"));
+        System.out.println(tokenizer.segment("我喜欢吃西瓜"));
     }
 }
