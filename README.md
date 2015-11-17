@@ -1,7 +1,6 @@
 # forum-search
 
 [![Build Status](https://travis-ci.org/at15/forum-search.svg?branch=master)](https://travis-ci.org/at15/forum-search)
-[![Code Climate](https://codeclimate.com/github/at15/forum-search/badges/gpa.svg)](https://codeclimate.com/github/at15/forum-search)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/790be2c9fe3b469c8a9660c6b8d67a43)](https://www.codacy.com/app/at15/forum-search)
 [![codecov.io](https://codecov.io/github/at15/forum-search/coverage.svg?branch=master)](https://codecov.io/github/at15/forum-search?branch=master)
 ![codecov.io](https://codecov.io/github/at15/forum-search/branch.svg?branch=master)
