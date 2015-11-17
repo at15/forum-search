@@ -31,6 +31,7 @@ public class DiscuzThreadTokenizerTest {
         List<Token> tokens = tokenizer.tokenize(str);
         Assert.assertEquals("我", tokens.get(0).getTerm());
         Assert.assertEquals((long) tokens.get(0).getPosition(), 0);
+        Assert.assertEquals((long) tokens.get(1).getPosition(), 1);
         // NOTE: the number of terms does not equals to number of word ... "出现" is one term
         Assert.assertEquals((long) tokens.get(0).getRank(), 2000 / tokens.size());
         Assert.assertEquals(false, tokens.get(0).isValid());

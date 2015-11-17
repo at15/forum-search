@@ -27,7 +27,7 @@ public class ThreadTokenizeMapper extends
         for (Token token : tokens) {
             // TODO: change url to real info, including rank, position, url
             term.set(token.getTerm());
-            info.set(token.getUrl());
+            info.set(token.toInfo());
             context.write(term, info);
         }
     }

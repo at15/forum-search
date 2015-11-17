@@ -4,6 +4,7 @@ package cn.edu.sjtu.at15.forum.tokenizer;
  * Created by gpl on 15/11/17.
  */
 public class Token {
+    public static final String SEP = ";";
     private String term;
     private Integer rank;
     private String url;
@@ -46,5 +47,9 @@ public class Token {
                 (rank != null) &&
                 (url != null) &&
                 (position != null);
+    }
+
+    public String toInfo() {
+        return url + SEP + rank + SEP + position;
     }
 }

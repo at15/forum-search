@@ -4,6 +4,7 @@ import cn.edu.sjtu.at15.forum.crawler.processor.discuz.DiscuzThread;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.seg.common.Term;
+import com.hankcs.hanlp.tokenizer.IndexTokenizer;
 import com.hankcs.hanlp.tokenizer.StandardTokenizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,8 @@ public class DiscuzThreadTokenizer {
     public static final Integer RANKBASE = 1000;
 
     public List<Term> segment(String str) {
-        return HanLP.segment(str);
+//        return HanLP.segment(str);
+        return IndexTokenizer.segment(str);
     }
 
     // set term, rank, position for a token
@@ -50,6 +52,7 @@ public class DiscuzThreadTokenizer {
             token.setTerm(term.word);
             // TODO: this won't work for string longer than RANKBASE, the result would be zero
             token.setRank(RANKBASE * termRanks.get(term.word) / termCount);
+            LOGGER.debug("offset is: " + term.offset);
             token.setPosition(term.offset);
             if (url != null) {
                 token.setUrl(url);
