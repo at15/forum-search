@@ -1,5 +1,7 @@
 package cn.edu.sjtu.at15.forum.crawler.processor.discuz;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Created by gpl on 15/11/15.
  * <p/>
@@ -15,6 +17,7 @@ public class DiscuzThread {
     private String author;
     private String authorPost;
 
+    @JsonIgnore
     public boolean isValid() {
         return (url != null) &&
                 (title != null) &&
