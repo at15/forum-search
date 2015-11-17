@@ -29,17 +29,26 @@ public class DiscuzThreadTokenizerTest {
         String str = "我知道我出现了两次";
         DiscuzThreadTokenizer tokenizer = new DiscuzThreadTokenizer();
         List<Token> tokens = tokenizer.tokenize(str);
-        Assert.assertEquals("我",tokens.get(0).getTerm());
+        Assert.assertEquals("我", tokens.get(0).getTerm());
         Assert.assertEquals((long) tokens.get(0).getPosition(), 0);
         // NOTE: the number of terms does not equals to number of word ... "出现" is one term
         Assert.assertEquals((long) tokens.get(0).getRank(), 2000 / tokens.size());
-        Assert.assertEquals(false,tokens.get(0).isValid());
+        Assert.assertEquals(false, tokens.get(0).isValid());
         tokens.get(0).setUrl("http://www.baidu.com");
-        Assert.assertEquals(true,tokens.get(0).isValid());
+        Assert.assertEquals(true, tokens.get(0).isValid());
 
-        tokens = tokenizer.tokenize(str,"http://www.baidu.com");
-        Assert.assertEquals(true,tokens.get(0).isValid());
+        tokens = tokenizer.tokenize(str, "http://www.baidu.com");
+        Assert.assertEquals(true, tokens.get(0).isValid());
 
+    }
+
+    @Test
+    public void testTokenizeThread() {
+        String json = "{\"url\":\"http://www.1point3acres.com/bbs/thread-147944-1-1.html\",\"title\":\"生娃答疑帖\",\"viewCount\":883,\"replyCount\":25,\"author\":\"qreety\",\"authorPost\":\"我是作者啊啊啊啊\"}";
+        DiscuzThreadTokenizer tokenizer = new DiscuzThreadTokenizer();
+        List<Token> tokens = tokenizer.tokenizeThread(json);
+        Assert.assertEquals(true, tokens.get(0).isValid());
+        Assert.assertEquals("生", tokens.get(0).getTerm());
     }
 
 }

@@ -1,11 +1,14 @@
 package cn.edu.sjtu.at15.forum.tokenizer;
 
+import cn.edu.sjtu.at15.forum.crawler.processor.discuz.DiscuzThread;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.tokenizer.StandardTokenizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +19,7 @@ import java.util.Map;
  */
 public class DiscuzThreadTokenizer {
     private static final Logger LOGGER = LoggerFactory.getLogger(DiscuzThreadTokenizer.class);
+    private static final ObjectMapper mapper = new ObjectMapper();
     public static final Integer RANKBASE = 1000;
 
     public List<Term> segment(String str) {
@@ -51,6 +55,22 @@ public class DiscuzThreadTokenizer {
                 token.setUrl(url);
             }
             tokens.add(token);
+        }
+        return tokens;
+    }
+
+    public List<Token> tokenizeThread(String json) {
+        List<Token> tokens = new ArrayList<Token>();
+        try {
+            DiscuzThread thread = mapper.readValue(json, DiscuzThread.class);
+            // TODO: title and post should be treated differently
+            List<Token> title = tokenize(thread.getTitle(), thread.getUrl());
+            List<Token> authorPost = tokenize(thread.getAuthorPost(), thread.getUrl());
+            tokens.addAll(title);
+            tokens.addAll(authorPost);
+        } catch (IOException ex) {
+            LOGGER.warn("wrong json format for thread ", ex);
+            // TODO: return null or an empty list?
         }
         return tokens;
     }
