@@ -24,7 +24,7 @@ public class ThreadIndexer {
     public void runWordCount(String inputPath, String outputPath) {
         Configuration conf = new Configuration();
         try {
-            Job job = Job.getInstance(conf, "thread indexer");
+            Job job = Job.getInstance(conf, "thread indexer word count");
             job.setJarByClass(ThreadIndexer.class);
             job.setMapperClass(WordCountTokenizerMapper.class);
             job.setCombinerClass(WordCountIntSumReducer.class);
@@ -43,8 +43,29 @@ public class ThreadIndexer {
         }
     }
 
+    public void runThreadIndex(String inputPath, String outputPath) {
+        Configuration conf = new Configuration();
+        try {
+            Job job = Job.getInstance(conf, "thread indexer");
+            job.setJarByClass(ThreadIndexer.class);
+            job.setMapperClass(ThreadTokenizeMapper.class);
+            job.setReducerClass(ThreadReducer.class);
+            job.setOutputKeyClass(Text.class);
+            job.setOutputValueClass(Text.class);
+            FileInputFormat.addInputPath(job, new Path(inputPath));
+            FileOutputFormat.setOutputPath(job, new Path(outputPath));
+            job.submit();
+        } catch (IOException ex) {
+            LOGGER.error("got io exception for job", ex);
+        } catch (ClassNotFoundException ex) {
+            LOGGER.error("got class not found ", ex);
+        } catch (InterruptedException ex) {
+            LOGGER.error("got interrupted ", ex);
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         ThreadIndexer indexer = new ThreadIndexer();
-        indexer.runWordCount("/user/at15/input", "/user/at15/output/1");
+        indexer.runThreadIndex(args[0], args[1]);
     }
 }

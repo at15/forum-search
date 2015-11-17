@@ -41,7 +41,7 @@ public class DiscuzJsonFilePipline implements Pipeline {
 
     public void write(String url, DiscuzThread thread) throws IOException {
         LOGGER.debug("current directory " + System.getProperty("user.dir"));
-        File file = new File(baseFolder + "/" + DiscuzStringUtils.encodeBase64(url));
+        File file = new File(baseFolder + "/" + DiscuzStringUtils.encodeBase64(url) + ".json");
         if (!file.exists()) {
             file.createNewFile();
         }
