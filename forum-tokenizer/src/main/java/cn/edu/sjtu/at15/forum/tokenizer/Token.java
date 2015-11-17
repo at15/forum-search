@@ -52,4 +52,14 @@ public class Token {
     public String toInfo() {
         return url + SEP + rank + SEP + position;
     }
+
+    public static Token fromInfo(String info, String term) {
+        String[] s = info.split(SEP);
+        Token t = new Token();
+        t.setTerm(term);
+        t.setUrl(s[0]);
+        t.setRank(Integer.valueOf(s[1]));
+        t.setPosition(Integer.valueOf(s[2]));
+        return t;
+    }
 }
