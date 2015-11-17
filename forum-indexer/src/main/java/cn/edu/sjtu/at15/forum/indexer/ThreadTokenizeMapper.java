@@ -1,10 +1,13 @@
 package cn.edu.sjtu.at15.forum.indexer;
 
+import cn.edu.sjtu.at15.forum.tokenizer.DiscuzThreadTokenizer;
+import cn.edu.sjtu.at15.forum.tokenizer.Token;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -13,10 +16,15 @@ import java.util.StringTokenizer;
 public class ThreadTokenizeMapper extends
         Mapper<Object, Text, Text, Text> {
     private Text token = new Text();
+    private DiscuzThreadTokenizer tokenizer = new DiscuzThreadTokenizer();
 
     public void map(Object key, Text value, Context context
     ) throws IOException, InterruptedException {
         String json = value.toString();
-
+        List<Token> tokens = tokenizer.tokenizeThread(json);
+        for(Token token : tokens){
+            // TODO: change url to real info, including rank, position, url
+            context.write(new Text(token.getTerm()),new Text(token.getUrl()));
+        }
     }
 }
