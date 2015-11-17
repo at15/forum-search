@@ -2,14 +2,11 @@ package cn.edu.sjtu.at15.forum.indexer;
 
 import cn.edu.sjtu.at15.forum.tokenizer.DiscuzThreadTokenizer;
 import cn.edu.sjtu.at15.forum.tokenizer.Token;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hankcs.hanlp.seg.common.Term;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.StringTokenizer;
 
 /**
  * Created by gpl on 15/11/17.

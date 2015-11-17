@@ -52,7 +52,7 @@ public class DiscuzThreadTokenizer {
             token.setTerm(term.word);
             // TODO: this won't work for string longer than RANKBASE, the result would be zero
             token.setRank(RANKBASE * termRanks.get(term.word) / termCount);
-            LOGGER.debug("offset is: " + term.offset);
+//            LOGGER.debug("offset is: " + term.offset);
             token.setPosition(term.offset);
             if (url != null) {
                 token.setUrl(url);
