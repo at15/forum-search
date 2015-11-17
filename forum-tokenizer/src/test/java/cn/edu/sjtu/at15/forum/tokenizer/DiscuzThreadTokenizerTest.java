@@ -33,6 +33,13 @@ public class DiscuzThreadTokenizerTest {
         Assert.assertEquals((long) tokens.get(0).getPosition(), 0);
         // NOTE: the number of terms does not equals to number of word ... "出现" is one term
         Assert.assertEquals((long) tokens.get(0).getRank(), 2000 / tokens.size());
+        Assert.assertEquals(false,tokens.get(0).isValid());
+        tokens.get(0).setUrl("http://www.baidu.com");
+        Assert.assertEquals(true,tokens.get(0).isValid());
+
+        tokens = tokenizer.tokenize(str,"http://www.baidu.com");
+        Assert.assertEquals(true,tokens.get(0).isValid());
 
     }
+
 }

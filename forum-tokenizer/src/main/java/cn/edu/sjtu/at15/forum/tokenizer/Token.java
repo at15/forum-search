@@ -40,4 +40,11 @@ public class Token {
     public void setPosition(Integer position) {
         this.position = position;
     }
+
+    public boolean isValid() {
+        return (term != null) &&
+                (rank != null) &&
+                (url != null) &&
+                (position != null);
+    }
 }

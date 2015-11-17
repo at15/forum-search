@@ -13,5 +13,6 @@ public class TokenTest {
         Token t = new Token();
         t.setTerm("a");
         Assert.assertEquals("a", t.getTerm());
+        Assert.assertEquals(false,t.isValid());
     }
 }

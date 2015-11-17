@@ -22,7 +22,12 @@ public class DiscuzThreadTokenizer {
         return HanLP.segment(str);
     }
 
+    // set term, rank, position for a token
     public List<Token> tokenize(String str) {
+        return tokenize(str, null);
+    }
+
+    public List<Token> tokenize(String str, String url) {
         List<Term> terms = segment(str);
         List<Token> tokens = new ArrayList<Token>();
         Map<String, Integer> termRanks = new HashMap<String, Integer>();
@@ -42,6 +47,9 @@ public class DiscuzThreadTokenizer {
             // TODO: this won't work for string longer than RANKBASE, the result would be zero
             token.setRank(RANKBASE * termRanks.get(term.word) / termCount);
             token.setPosition(term.offset);
+            if (url != null) {
+                token.setUrl(url);
+            }
             tokens.add(token);
         }
         return tokens;
