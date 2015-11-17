@@ -39,9 +39,7 @@ public class DiscuzThreadTokenizer {
         for (Term term : terms) {
             Token token = new Token();
             token.setTerm(term.word);
-            LOGGER.debug(term.word);
-            LOGGER.debug("ranks " + termRanks.get(term.word) + " count " + termCount);
-            LOGGER.debug("rank " + (RANKBASE * termRanks.get(term.word) / termCount));
+            // TODO: this won't work for string longer than RANKBASE, the result would be zero
             token.setRank(RANKBASE * termRanks.get(term.word) / termCount);
             token.setPosition(term.offset);
             tokens.add(token);
