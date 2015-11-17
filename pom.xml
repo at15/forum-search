@@ -17,6 +17,7 @@
         <module>forum-crawler</module>
         <module>forum-uploader</module>
         <module>forum-tokenizer</module>
+        <module>forum-indexer</module>
     </modules>
 
     <properties>
