@@ -85,12 +85,4 @@ public class DiscuzStringUtils {
         LOGGER.debug(authorPost);
         return thread;
     }
-
-    public static String encodeBase64(String str) {
-        return new String(Base64.encodeBase64(str.getBytes()));
-    }
-
-    public static String decodeBase64(String encoded) {
-        return new String(Base64.decodeBase64(encoded));
-    }
 }

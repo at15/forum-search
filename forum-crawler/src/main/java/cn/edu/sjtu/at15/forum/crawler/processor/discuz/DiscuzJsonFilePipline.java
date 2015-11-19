@@ -7,6 +7,8 @@ import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
+import cn.edu.sjtu.at15.forum.common.StringUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InvalidObjectException;
@@ -41,7 +43,7 @@ public class DiscuzJsonFilePipline implements Pipeline {
 
     public void write(String url, DiscuzThread thread) throws IOException {
         LOGGER.debug("current directory " + System.getProperty("user.dir"));
-        File file = new File(baseFolder + "/" + DiscuzStringUtils.encodeBase64(url) + ".json");
+        File file = new File(baseFolder + "/" + StringUtils.encodeBase64(url) + ".json");
         if (!file.exists()) {
             file.createNewFile();
         }

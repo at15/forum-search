@@ -31,11 +31,4 @@ public class DiscuzStringUtilsTest {
         Assert.assertEquals((long) DiscuzStringUtils.getMaxPage(p), 12);
         Assert.assertEquals((long) DiscuzStringUtils.getMaxPage("aaa"), 0);
     }
-
-    @Test
-    public void testBase64(){
-        String url = "http://1.com/a/b/c";
-        String encoded = DiscuzStringUtils.encodeBase64(url);
-        Assert.assertEquals(url,DiscuzStringUtils.decodeBase64(encoded));
-    }
 }
