@@ -5,7 +5,7 @@
 ## TODO
 
 - [x] 配置hdfs
-- [ ] 上传数据到远程的hdfs (vagrant)
+- [x] ~~上传数据到远程的hdfs (vagrant)~~ 直接改成用bundle的hadoop了
 
 ## FAQ
 
