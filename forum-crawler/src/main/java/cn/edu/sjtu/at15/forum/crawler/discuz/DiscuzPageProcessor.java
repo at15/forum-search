@@ -1,16 +1,19 @@
-package cn.edu.sjtu.at15.forum.crawler.processor.discuz;
+package cn.edu.sjtu.at15.forum.crawler.discuz;
 
+import cn.edu.sjtu.at15.forum.crawler.processor.discuz.DiscuzJsonFilePipline;
+import cn.edu.sjtu.at15.forum.crawler.processor.discuz.DiscuzStringUtils;
+import cn.edu.sjtu.at15.forum.crawler.processor.discuz.DiscuzThread;
+import cn.edu.sjtu.at15.forum.crawler.processor.discuz.DiscuzUrl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
- * Created by gpl on 15/11/14.
+ * Created by at15 on 15-11-19.
  */
 public class DiscuzPageProcessor implements PageProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(DiscuzPageProcessor.class);
@@ -74,8 +77,8 @@ public class DiscuzPageProcessor implements PageProcessor {
 
     public static void main(String[] args) throws Exception {
         Spider.create(new DiscuzPageProcessor("http://www.1point3acres.com/bbs/"))
-                .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
-//                .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
+//                .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
+                .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
                 .addPipeline(new ConsolePipeline())
                 .addPipeline(new DiscuzJsonFilePipline("data"))
                 .thread(5)
