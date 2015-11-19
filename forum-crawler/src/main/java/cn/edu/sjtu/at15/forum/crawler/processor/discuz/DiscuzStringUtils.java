@@ -1,5 +1,6 @@
 package cn.edu.sjtu.at15.forum.crawler.processor.discuz;
 
+import cn.edu.sjtu.at15.forum.crawler.discuz.ThreadParser;
 import org.apache.commons.codec.binary.Base64;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -32,55 +33,25 @@ public class DiscuzStringUtils {
         return 0;
     }
 
-    public static String getAuthor(String thread) {
-        Document doc = Jsoup.parse(thread);
-        String author = doc.select("#postlist > div").first()
-                .select("div.authi > a.xi2").text();
-        return author;
-    }
-
-    public static Integer getViewCount(String thread) {
-        Document doc = Jsoup.parse(thread);
-        String count = doc.select("#postlist > table").first()
-                .select("span.xi1").first().text();
-        Integer viewCount = Integer.valueOf(count);
-        return viewCount;
-    }
-
-    public static Integer getReplyCount(String thread) {
-        Document doc = Jsoup.parse(thread);
-        String count = doc.select("#postlist > table").first()
-                .select("span.xi1").get(1).text();
-        Integer replyCount = Integer.valueOf(count);
-        return replyCount;
-    }
-
-    public static String getAuthorPost(String thread) {
-        // TODO: clear the ads using http://jsoup.org/cookbook/modifying-data/set-text
-        Document doc = Jsoup.parse(thread);
-        String post = doc.select("#postlist > div").first()
-                .select("td.t_f").text();
-        return post;
-    }
-
     // TODO: should get all the comments as well, but we don't have much time, so.
     public static DiscuzThread parseThread(Page page) {
         DiscuzThread thread = new DiscuzThread();
+        ThreadParser threadParser = new ThreadParser(page.getHtml().toString());
         thread.setUrl(page.getUrl().toString());
-        // TODO: parse author, view count, reply count, content
-        String title = stripTags(page.getHtml().css("span#thread_subject").toString());
+        // moved
+        String title = threadParser.getTitle();
         LOGGER.debug("thread title : " + title);
         thread.setTitle(title);
-        String author = getAuthor(page.getHtml().toString());
+        String author = threadParser.getAuthor();
         thread.setAuthor(author);
         LOGGER.debug("thread author : " + author);
-        Integer viewCount = getViewCount(page.getHtml().toString());
+        Integer viewCount = threadParser.getViewCount();
         thread.setViewCount(viewCount);
         LOGGER.debug("thread view count : " + viewCount);
-        Integer replyCount = getReplyCount(page.getHtml().toString());
+        Integer replyCount = threadParser.getViewCount();
         thread.setReplyCount(replyCount);
         LOGGER.debug("thread reply count : " + replyCount);
-        String authorPost = getAuthorPost(page.getHtml().toString());
+        String authorPost = threadParser.getAuthorPost();
         thread.setAuthorPost(authorPost);
         LOGGER.debug(authorPost);
         return thread;
