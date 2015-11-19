@@ -1,6 +1,5 @@
-package cn.edu.sjtu.at15.forum.crawler.processor.discuz;
+package cn.edu.sjtu.at15.forum.crawler.discuz;
 
-import cn.edu.sjtu.at15.forum.crawler.discuz.JsonFilePipline;
 import cn.edu.sjtu.at15.forum.crawler.entity.ForumThread;
 import org.junit.Test;
 
@@ -9,7 +8,7 @@ import java.io.IOException;
 /**
  * Created by gpl on 15/11/17.
  */
-public class DiscuzJsonFilePiplineTest {
+public class JsonFilePiplineTest {
     @Test
     public void testWrite() throws IOException {
         ForumThread thread = new ForumThread();

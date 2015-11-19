@@ -1,13 +1,12 @@
-package cn.edu.sjtu.at15.forum.crawler.processor.discuz;
+package cn.edu.sjtu.at15.forum.crawler.discuz;
 
-import cn.edu.sjtu.at15.forum.crawler.discuz.Url;
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * Created by gpl on 15/11/14.
  */
-public class DiscuzUrlTest {
+public class UrlTest {
     private final Url url = new Url("http://www.1point3acres.com/bbs/");
 
     @Test
