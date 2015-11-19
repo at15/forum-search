@@ -18,6 +18,7 @@
         <module>forum-uploader</module>
         <module>forum-tokenizer</module>
         <module>forum-indexer</module>
+        <module>forum-common</module>
     </modules>
 
     <properties>
