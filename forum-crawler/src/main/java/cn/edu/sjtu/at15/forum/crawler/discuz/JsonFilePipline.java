@@ -1,5 +1,6 @@
-package cn.edu.sjtu.at15.forum.crawler.processor.discuz;
+package cn.edu.sjtu.at15.forum.crawler.discuz;
 
+import cn.edu.sjtu.at15.forum.crawler.processor.discuz.DiscuzThread;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,12 +17,12 @@ import java.io.InvalidObjectException;
 /**
  * Created by gpl on 15/11/16.
  */
-public class DiscuzJsonFilePipline implements Pipeline {
-    private final static Logger LOGGER = LoggerFactory.getLogger(DiscuzJsonFilePipline.class);
+public class JsonFilePipline implements Pipeline {
+    private final static Logger LOGGER = LoggerFactory.getLogger(JsonFilePipline.class);
     private final String baseFolder;
     private final static ObjectMapper mapper = new ObjectMapper();
 
-    public DiscuzJsonFilePipline(String baseFolder) {
+    public JsonFilePipline(String baseFolder) {
         this.baseFolder = baseFolder;
     }
 

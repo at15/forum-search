@@ -1,6 +1,6 @@
 package cn.edu.sjtu.at15.forum.crawler.processor.discuz;
 
-import org.junit.Assert;
+import cn.edu.sjtu.at15.forum.crawler.discuz.JsonFilePipline;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -17,7 +17,7 @@ public class DiscuzJsonFilePiplineTest {
         thread.setViewCount(100);
         thread.setReplyCount(100);
         thread.setAuthorPost("this is some dummy content");
-        DiscuzJsonFilePipline pipline = new DiscuzJsonFilePipline("data");
+        JsonFilePipline pipline = new JsonFilePipline("data");
         pipline.write("a.baidu.com", thread);
 
         thread.setUrl("http://www.baidu.com");

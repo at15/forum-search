@@ -1,5 +1,6 @@
 package cn.edu.sjtu.at15.forum.crawler.processor.discuz;
 
+import cn.edu.sjtu.at15.forum.crawler.discuz.Url;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -7,31 +8,31 @@ import org.junit.Test;
  * Created by gpl on 15/11/14.
  */
 public class DiscuzUrlTest {
-    private final DiscuzUrl discuzUrl = new DiscuzUrl("http://www.1point3acres.com/bbs/");
+    private final Url url = new Url("http://www.1point3acres.com/bbs/");
 
     @Test
     public void testRemoveTrailingSlash() {
-        Assert.assertEquals(discuzUrl.getBaseUrl(), "http://www.1point3acres.com/bbs");
+        Assert.assertEquals(url.getBaseUrl(), "http://www.1point3acres.com/bbs");
     }
 
     @Test
     public void testInner() {
-        Assert.assertEquals(discuzUrl.isInner("http://www.baidu.com/ads/123"), false);
-        Assert.assertEquals(discuzUrl.isInner("http://www.1point3acres.com/bbs/forum.php"), true);
+        Assert.assertEquals(url.isInnerLink("http://www.baidu.com/ads/123"), false);
+        Assert.assertEquals(url.isInnerLink("http://www.1point3acres.com/bbs/forum.php"), true);
     }
 
     @Test
     public void testThreadUrl() {
-        Assert.assertEquals(discuzUrl.isThread("aaaa"), false);
-        Assert.assertEquals(discuzUrl
+        Assert.assertEquals(url.isThread("aaaa"), false);
+        Assert.assertEquals(url
                 .isThread("http://www.1point3acres.com/bbs/thread-147140-1-1.html"), true);
     }
 
     @Test
     public void testList() {
-        Assert.assertEquals(discuzUrl
+        Assert.assertEquals(url
                 .isList("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot"), true);
-        Assert.assertEquals(discuzUrl
+        Assert.assertEquals(url
                 .isList("http://www.1point3acres.com/bbs/come_on_baby_lets_xx"), false);
     }
 }
