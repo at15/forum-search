@@ -13,7 +13,7 @@ import java.util.List;
  * Created by gpl on 15/11/17.
  */
 public class ThreadReducerTest {
-    ReduceDriver<Text, Text, Text, Text> reduceDriver;
+    private ReduceDriver<Text, Text, Text, Text> reduceDriver;
 
     @Before
     public void setUp() {

@@ -11,7 +11,7 @@ import java.io.IOException;
  * Created by gpl on 15/11/17.
  */
 public class ThreadTokenizeMapperTest {
-    MapDriver<Object, Text, Text, Text> mapDriver;
+    private MapDriver<Object, Text, Text, Text> mapDriver;
 
     @Before
     public void setUp() {

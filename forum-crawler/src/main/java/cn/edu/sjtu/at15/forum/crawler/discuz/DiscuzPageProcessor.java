@@ -1,14 +1,15 @@
 package cn.edu.sjtu.at15.forum.crawler.discuz;
 
-import cn.edu.sjtu.at15.forum.crawler.processor.discuz.DiscuzStringUtils;
-import cn.edu.sjtu.at15.forum.crawler.entity.ForumThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
+
+import cn.edu.sjtu.at15.forum.crawler.entity.ForumThread;
 
 /**
  * Created by at15 on 15-11-19.
@@ -49,9 +50,8 @@ public class DiscuzPageProcessor implements PageProcessor {
         if (url.isList(currentUrl)) {
             LOGGER.debug("processing list page");
             // get the max page number
-            String pagination = page.getHtml().css("div.pg>label>span").toString();
-            LOGGER.debug(pagination);
-            Integer maxPage = DiscuzStringUtils.getMaxPage(pagination);
+            ListParser listParser = new ListParser(page.getHtml().toString());
+            Integer maxPage = listParser.getMaxPage();
             LOGGER.debug("max page : " + maxPage);
             // TODO: add all the page links, since webmagic will handle the duplicate url
             // TODO: handle maxPage == 0
@@ -98,8 +98,8 @@ public class DiscuzPageProcessor implements PageProcessor {
 
     public static void main(String[] args) throws Exception {
         Spider.create(new DiscuzPageProcessor("http://www.1point3acres.com/bbs/"))
-//                .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
-                .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
+                .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
+//                .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
                 .addPipeline(new ConsolePipeline())
                 .addPipeline(new JsonFilePipline("data"))
                 .thread(5)

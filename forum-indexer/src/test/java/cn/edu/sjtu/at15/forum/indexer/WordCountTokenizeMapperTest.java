@@ -12,7 +12,7 @@ import java.io.IOException;
  * Created by gpl on 15/11/17.
  */
 public class WordCountTokenizeMapperTest {
-    MapDriver<Object, Text, Text, IntWritable> mapDriver;
+    private MapDriver<Object, Text, Text, IntWritable> mapDriver;
 
     @Before
     public void setUp() {

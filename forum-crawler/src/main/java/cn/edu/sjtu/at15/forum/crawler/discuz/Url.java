@@ -10,6 +10,8 @@ public class Url extends cn.edu.sjtu.at15.forum.crawler.Url {
         super(baseUrl);
     }
 
+    // FIXME: http://www.1point3acres.com/bbs/thread-146437-5-1.html is not the first page for thread.
+    // it's the comment page, so the parser will got error.
     public boolean isThread(String url) {
         return url.startsWith(baseUrl + "/thread-");
     }
