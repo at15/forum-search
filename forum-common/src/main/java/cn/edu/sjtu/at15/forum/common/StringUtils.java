@@ -13,4 +13,8 @@ public class StringUtils {
     public static String decodeBase64(String encoded) {
         return new String(Base64.decodeBase64(encoded));
     }
+
+    public static String trimLastSlash(String str) {
+        return org.apache.commons.lang.StringUtils.chomp(str, "/");
+    }
 }

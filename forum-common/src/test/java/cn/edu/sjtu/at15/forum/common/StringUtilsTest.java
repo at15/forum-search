@@ -12,4 +12,10 @@ public class StringUtilsTest {
         String p = "I am a new man looking for a new run la la la la";
         Assert.assertEquals(p, StringUtils.decodeBase64(StringUtils.encodeBase64(p)));
     }
+
+    @Test
+    public void testTrimLastSlash() {
+        String s = "a/c/c";
+        Assert.assertEquals("a/c/c", StringUtils.trimLastSlash(s));
+    }
 }

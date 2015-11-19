@@ -1,6 +1,6 @@
 package cn.edu.sjtu.at15.forum.crawler.processor.discuz;
 
-import org.apache.commons.lang.StringUtils;
+import cn.edu.sjtu.at15.forum.common.StringUtils;
 
 /**
  * Created by gpl on 15/11/14.
@@ -9,7 +9,7 @@ public class DiscuzUrl {
     private String baseUrl;
 
     public DiscuzUrl(String baseUrl) {
-        this.baseUrl = StringUtils.chomp(baseUrl, "/");
+        this.baseUrl = StringUtils.trimLastSlash(baseUrl);
     }
 
     public String getBaseUrl() {
