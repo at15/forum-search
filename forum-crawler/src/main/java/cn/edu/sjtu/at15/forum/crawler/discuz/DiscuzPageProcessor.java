@@ -78,7 +78,6 @@ public class DiscuzPageProcessor implements PageProcessor {
         ForumThread thread = new ForumThread();
         ThreadParser threadParser = new ThreadParser(page.getHtml().toString());
         thread.setUrl(page.getUrl().toString());
-        // moved
         String title = threadParser.getTitle();
         LOGGER.debug("thread title : " + title);
         thread.setTitle(title);
@@ -88,7 +87,7 @@ public class DiscuzPageProcessor implements PageProcessor {
         Integer viewCount = threadParser.getViewCount();
         thread.setViewCount(viewCount);
         LOGGER.debug("thread view count : " + viewCount);
-        Integer replyCount = threadParser.getViewCount();
+        Integer replyCount = threadParser.getReplyCount();
         thread.setReplyCount(replyCount);
         LOGGER.debug("thread reply count : " + replyCount);
         String authorPost = threadParser.getAuthorPost();
