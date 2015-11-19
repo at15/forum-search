@@ -1,5 +1,6 @@
 package cn.edu.sjtu.at15.forum.tokenizer;
 
+import cn.edu.sjtu.at15.forum.crawler.entity.ForumThread;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.tokenizer.IndexTokenizer;
@@ -62,7 +63,7 @@ public class DiscuzThreadTokenizer {
     public List<Token> tokenizeThread(String json) {
         List<Token> tokens = new ArrayList<Token>();
         try {
-            DiscuzThread thread = mapper.readValue(json, DiscuzThread.class);
+            ForumThread thread = mapper.readValue(json, ForumThread.class);
             // TODO: title and post should be treated differently
             List<Token> title = tokenize(thread.getTitle(), thread.getUrl());
             List<Token> authorPost = tokenize(thread.getAuthorPost(), thread.getUrl());
