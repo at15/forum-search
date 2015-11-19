@@ -16,7 +16,7 @@ public class DiscuzUrlTest {
     }
 
     @Test
-    public void testInner() {
+    public void testIsInnerLink() {
         Assert.assertEquals(url.isInnerLink("http://www.baidu.com/ads/123"), false);
         Assert.assertEquals(url.isInnerLink("http://www.1point3acres.com/bbs/forum.php"), true);
     }

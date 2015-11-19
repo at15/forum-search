@@ -11,12 +11,6 @@ import org.junit.Test;
  */
 public class DiscuzStringUtilsTest {
     @Test
-    public void testStripTags() {
-        String p = "<span id=\"thread_subject\">新人攒分 - 最简要，提纲版</span>";
-        Assert.assertEquals(DiscuzStringUtils.stripTags(p), "新人攒分 - 最简要，提纲版");
-    }
-
-    @Test
     public void testGetMaxPage() {
         String p = "<span title=\"共 12 页\"> / 12 页</span>";
 //        Pattern pattern = Pattern.compile("(.*)\\s(\\d+)\\s(.*)");

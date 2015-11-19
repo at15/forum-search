@@ -12,7 +12,7 @@ public class Util {
         return doc.body().text();
     }
 
-    public static String stripTage(Document document) {
+    public static String stripTags(Document document) {
         return document.body().text();
     }
 }

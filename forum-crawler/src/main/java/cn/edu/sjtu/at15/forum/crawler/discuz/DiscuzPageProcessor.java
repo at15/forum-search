@@ -38,7 +38,7 @@ public class DiscuzPageProcessor implements PageProcessor {
         // deal with thread
         if (url.isThread(currentUrl)) {
             LOGGER.debug("processing thread");
-            DiscuzThread thread = DiscuzStringUtils.parseThread(page);
+            DiscuzThread thread = parseThread(page);
             page.putField("url", currentUrl);
             page.putField("thread", thread);
             return;
@@ -71,6 +71,30 @@ public class DiscuzPageProcessor implements PageProcessor {
             }
             return;
         }
+    }
+
+    // TODO: should get all the comments as well, but we don't have much time, so.
+    protected static DiscuzThread parseThread(Page page) {
+        DiscuzThread thread = new DiscuzThread();
+        ThreadParser threadParser = new ThreadParser(page.getHtml().toString());
+        thread.setUrl(page.getUrl().toString());
+        // moved
+        String title = threadParser.getTitle();
+        LOGGER.debug("thread title : " + title);
+        thread.setTitle(title);
+        String author = threadParser.getAuthor();
+        thread.setAuthor(author);
+        LOGGER.debug("thread author : " + author);
+        Integer viewCount = threadParser.getViewCount();
+        thread.setViewCount(viewCount);
+        LOGGER.debug("thread view count : " + viewCount);
+        Integer replyCount = threadParser.getViewCount();
+        thread.setReplyCount(replyCount);
+        LOGGER.debug("thread reply count : " + replyCount);
+        String authorPost = threadParser.getAuthorPost();
+        thread.setAuthorPost(authorPost);
+        LOGGER.debug(authorPost);
+        return thread;
     }
 
     public static void main(String[] args) throws Exception {
