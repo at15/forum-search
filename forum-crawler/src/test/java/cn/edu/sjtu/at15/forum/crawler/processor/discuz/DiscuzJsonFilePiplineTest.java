@@ -1,6 +1,7 @@
 package cn.edu.sjtu.at15.forum.crawler.processor.discuz;
 
 import cn.edu.sjtu.at15.forum.crawler.discuz.JsonFilePipline;
+import cn.edu.sjtu.at15.forum.crawler.entity.ForumThread;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.io.IOException;
 public class DiscuzJsonFilePiplineTest {
     @Test
     public void testWrite() throws IOException {
-        DiscuzThread thread = new DiscuzThread();
+        ForumThread thread = new ForumThread();
         thread.setTitle("xiaoming");
         thread.setAuthor("xiaowang");
         thread.setViewCount(100);

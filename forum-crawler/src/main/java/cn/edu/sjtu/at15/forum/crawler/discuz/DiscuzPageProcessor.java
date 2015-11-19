@@ -1,7 +1,7 @@
 package cn.edu.sjtu.at15.forum.crawler.discuz;
 
 import cn.edu.sjtu.at15.forum.crawler.processor.discuz.DiscuzStringUtils;
-import cn.edu.sjtu.at15.forum.crawler.processor.discuz.DiscuzThread;
+import cn.edu.sjtu.at15.forum.crawler.entity.ForumThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Page;
@@ -38,7 +38,7 @@ public class DiscuzPageProcessor implements PageProcessor {
         // deal with thread
         if (url.isThread(currentUrl)) {
             LOGGER.debug("processing thread");
-            DiscuzThread thread = parseThread(page);
+            ForumThread thread = parseThread(page);
             page.putField("url", currentUrl);
             page.putField("thread", thread);
             return;
@@ -74,8 +74,8 @@ public class DiscuzPageProcessor implements PageProcessor {
     }
 
     // TODO: should get all the comments as well, but we don't have much time, so.
-    protected static DiscuzThread parseThread(Page page) {
-        DiscuzThread thread = new DiscuzThread();
+    protected static ForumThread parseThread(Page page) {
+        ForumThread thread = new ForumThread();
         ThreadParser threadParser = new ThreadParser(page.getHtml().toString());
         thread.setUrl(page.getUrl().toString());
         // moved

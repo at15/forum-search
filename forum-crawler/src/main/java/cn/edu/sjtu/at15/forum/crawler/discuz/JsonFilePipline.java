@@ -1,6 +1,5 @@
 package cn.edu.sjtu.at15.forum.crawler.discuz;
 
-import cn.edu.sjtu.at15.forum.crawler.processor.discuz.DiscuzThread;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +8,7 @@ import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
 import cn.edu.sjtu.at15.forum.common.StringUtils;
+import cn.edu.sjtu.at15.forum.crawler.entity.ForumThread;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +27,7 @@ public class JsonFilePipline implements Pipeline {
     }
 
     public void process(ResultItems resultItems, Task task) {
-        DiscuzThread thread = resultItems.get("thread");
+        ForumThread thread = resultItems.get("thread");
         try {
             write(thread);
         }catch (IOException ex){
@@ -35,14 +35,14 @@ public class JsonFilePipline implements Pipeline {
         }
     }
 
-    public void write(DiscuzThread thread) throws IOException {
+    public void write(ForumThread thread) throws IOException {
         if (!thread.isValid()) {
             throw new InvalidObjectException("thread is not valid, lack some attrs like url");
         }
         write(thread.getUrl(), thread);
     }
 
-    public void write(String url, DiscuzThread thread) throws IOException {
+    public void write(String url, ForumThread thread) throws IOException {
         LOGGER.debug("current directory " + System.getProperty("user.dir"));
         File file = new File(baseFolder + "/" + StringUtils.encodeBase64(url) + ".json");
         if (!file.exists()) {

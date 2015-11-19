@@ -1,11 +1,8 @@
 package cn.edu.sjtu.at15.forum.tokenizer;
 
-import cn.edu.sjtu.at15.forum.crawler.processor.discuz.DiscuzThread;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.tokenizer.IndexTokenizer;
-import com.hankcs.hanlp.tokenizer.StandardTokenizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
