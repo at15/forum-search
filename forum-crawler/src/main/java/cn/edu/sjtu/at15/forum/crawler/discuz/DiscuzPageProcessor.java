@@ -30,48 +30,44 @@ public class DiscuzPageProcessor implements PageProcessor {
 
     public void process(Page page) {
         String currentUrl = page.getUrl().toString();
+        String html = page.getRawText();
         LOGGER.debug("processing page : " + currentUrl);
+
         if (!url.isInnerLink(currentUrl)) {
-            LOGGER.debug("not inner link : " + currentUrl);
+            LOGGER.debug("not inner link ignore : " + currentUrl);
             return;
         }
 
         // deal with thread
-        // TODO: there are threads and thread comments, should be treated differently
         if (url.isThread(currentUrl)) {
             LOGGER.debug("processing thread");
+            // TODO: there are threads and thread comments, should be treated differently
+            // put the logic in parseThread
             ForumThread thread = parseThread(page);
             page.putField("url", currentUrl);
             page.putField("thread", thread);
             return;
         }
 
-        // TODO: 2. if this is a list page, get all the links in this page, and add other pages
-        // NOTE: discuzz will show the total page in the last of pagination
-        if (url.isList(currentUrl)) {
-            LOGGER.debug("processing list page");
-            // get the max page number
-            ListParser listParser = new ListParser(page.getRawText());
-            Integer maxPage = listParser.getMaxPage();
-            LOGGER.debug("max page : " + maxPage);
-            // TODO: add all the page links, since webmagic will handle the duplicate url
-            // TODO: handle maxPage == 0
-
-            // loop through all thread links
-            for (String link : page.getHtml().links().all()) {
-                // ignore outer link
-                if (!url.isInnerLink(link)) {
-                    continue;
-                }
-                LOGGER.debug(link);
-                if (url.isThread(link)) {
-                    page.addTargetRequest(link);
-                }
-                // we don't consider nested list.
-                // otherwise we would need to deal with duplicate links and circle refs
-                // TODO: handle list pagination here.
-            }
+        // try to parse as a list page
+        try {
+            ListParser listParser = new ListParser(html);
+            // get all the pages for list from pagination
+            page.addTargetRequests(listParser.getPageLinks());
+            page.addTargetRequests(listParser.getThreadLinks());
             return;
+        } catch (IllegalArgumentException ignore) {
+            LOGGER.warn("not a list page : " + currentUrl);
+        }
+
+        // this is other type of pages, we just simply add all inner links
+        for (String link : page.getHtml().links().all()) {
+            // ignore outer link
+            if (!url.isInnerLink(link)) {
+                continue;
+            }
+            LOGGER.debug(link);
+            page.addTargetRequest(link);
         }
     }
 
