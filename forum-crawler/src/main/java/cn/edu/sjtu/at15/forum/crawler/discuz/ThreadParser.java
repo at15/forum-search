@@ -17,54 +17,38 @@ public class ThreadParser extends Parser {
 
     public ThreadParser(String html) {
         super(html);
+        String count;
+        title = document.select("span#thread_subject").text();
+        author = document.select("#postlist > div").first()
+                .select("div.authi > a.xi2").text();
+        count = document.select("#postlist > table").first()
+                .select("span.xi1").first().text();
+        viewCount = Integer.valueOf(count);
+        count = document.select("#postlist > table").first()
+                .select("span.xi1").get(1).text();
+        replyCount = Integer.valueOf(count);
+        // TODO: clear the ads using http://jsoup.org/cookbook/modifying-data/set-text
+        authorPost = document.select("#postlist > div").first()
+                .select("td.t_f").text();
     }
 
     public String getTitle() {
-        if (title != null) {
-            return title;
-        }
-        title = document.select("span#thread_subject").text();
         return title;
     }
 
     public String getAuthor() {
-        if (author != null) {
-            return author;
-        }
-        author = document.select("#postlist > div").first()
-                .select("div.authi > a.xi2").text();
         return author;
     }
 
     public Integer getViewCount() {
-        if (viewCount != null) {
-            return viewCount;
-        }
-        String count = document.select("#postlist > table").first()
-                .select("span.xi1").first().text();
-        viewCount = Integer.valueOf(count);
         return viewCount;
     }
 
     public Integer getReplyCount() {
-        if (replyCount != null) {
-            return replyCount;
-        }
-        String count = document.select("#postlist > table").first()
-                .select("span.xi1").get(1).text();
-        replyCount = Integer.valueOf(count);
         return replyCount;
     }
 
-
     public String getAuthorPost() {
-        if (authorPost != null) {
-            return authorPost;
-        }
-        // TODO: clear the ads using http://jsoup.org/cookbook/modifying-data/set-text
-        authorPost = document.select("#postlist > div").first()
-                .select("td.t_f").text();
         return authorPost;
     }
-
 }
