@@ -9,7 +9,7 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-import cn.edu.sjtu.at15.forum.crawler.entity.ForumThread;
+import cn.edu.sjtu.at15.forum.common.entity.ForumThread;
 
 /**
  * Created by at15 on 15-11-19.
@@ -98,9 +98,9 @@ public class DiscuzPageProcessor implements PageProcessor {
 
     public static void main(String[] args) throws Exception {
         Spider.create(new DiscuzPageProcessor("http://www.1point3acres.com/bbs/"))
-                .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
-//                .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
-                .addPipeline(new ConsolePipeline())
+//                .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
+                .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
+//                .addPipeline(new ConsolePipeline())
                 .addPipeline(new JsonFilePipline("data"))
                 .thread(5)
                 .run();

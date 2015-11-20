@@ -1,6 +1,6 @@
 package cn.edu.sjtu.at15.forum.crawler.discuz;
 
-import cn.edu.sjtu.at15.forum.crawler.entity.ForumThread;
+import cn.edu.sjtu.at15.forum.common.entity.ForumThread;
 import org.junit.Test;
 
 import java.io.IOException;

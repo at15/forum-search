@@ -8,7 +8,7 @@ import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
 import cn.edu.sjtu.at15.forum.common.StringUtils;
-import cn.edu.sjtu.at15.forum.crawler.entity.ForumThread;
+import cn.edu.sjtu.at15.forum.common.entity.ForumThread;
 
 import java.io.File;
 import java.io.IOException;

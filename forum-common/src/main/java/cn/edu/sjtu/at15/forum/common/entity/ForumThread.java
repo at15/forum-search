@@ -1,4 +1,4 @@
-package cn.edu.sjtu.at15.forum.crawler.entity;
+package cn.edu.sjtu.at15.forum.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

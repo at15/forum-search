@@ -1,6 +1,6 @@
 package cn.edu.sjtu.at15.forum.tokenizer;
 
-import cn.edu.sjtu.at15.forum.crawler.entity.ForumThread;
+import cn.edu.sjtu.at15.forum.common.entity.ForumThread;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.tokenizer.IndexTokenizer;

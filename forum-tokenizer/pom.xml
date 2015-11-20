@@ -12,10 +12,9 @@
     <artifactId>forum-tokenizer</artifactId>
 
     <dependencies>
-        <!-- need to use pojo defined in crawler, should have a common module -->
         <dependency>
             <groupId>cn.edu.sjtu.at15</groupId>
-            <artifactId>forum-crawler</artifactId>
+            <artifactId>forum-common</artifactId>
             <version>0.0.1</version>
             <!-- crawler is not needed -->
             <exclusions>

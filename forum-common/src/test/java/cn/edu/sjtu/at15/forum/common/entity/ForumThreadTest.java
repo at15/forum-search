@@ -1,4 +1,4 @@
-package cn.edu.sjtu.at15.forum.crawler.entity;
+package cn.edu.sjtu.at15.forum.common.entity;
 
 import org.junit.Assert;
 import org.junit.Test;
