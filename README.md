@@ -5,34 +5,26 @@
 [![codecov.io](https://codecov.io/github/at15/forum-search/coverage.svg?branch=master)](https://codecov.io/github/at15/forum-search?branch=master)
 ![codecov.io](https://codecov.io/github/at15/forum-search/branch.svg?branch=master)
 
-爬取论坛数据, 存储在hadoop中, 进行分词和索引, 提供web界面用于搜索
+Craw forum data and store in hadoop, use mapreduce to tokenize and index the threads, provide search based on the built index.
 
-## 文档
+## Document
 
-- [传送门](doc)
+see `README.md` in every module, the doc folder is currently empty.
 
-## 组成
+## Modules
 
-项目主要分成以下几个部分
+The project is made by the following modules
 
-- crawler 按时爬取论坛数据
-- uploader 将爬虫爬到的数据上传到hdfs
-- indexer 分词, 生成索引, 存储到hdfs(?hbase)中
-- manager 调度crawler, uploader, indexer
-- manager ui, 显示crawler, uploader, indexer的状态
-- search api 提供搜索的restful api
-- search ui 提供搜索界面
+- crawler  craw forum data
+- uploader upload craw data to remote hdfs (I prefer to use the hdfs -put on local environment)
+- indexer tokenize using HanLP
+- manager (not implemented) control crawler, uploader and indexer
+- manager ui, (not implemented) show the current status of crawler, uploader and indexer
+- search api (not implemented) provide restful api for search, may use dropwizard or spring boot
+- search ui (not implemented) provide a web interface for search & advanced search
 
-### 各部分的细节
+## Copyright
 
-- crawler 待定
-- uploader 调用hadoop的api上传
-- indexer 在map reduce里进行分词和索引
-- manger 和 search 使用 dropwizard
-- ui 部分为spa(单页应用), 通过ajax调用api, api设置CORS
+- use **HanLP** for tokenize Chinese https://github.com/hankcs/HanLP
 
-## 版权
-
-使用了 HanLP 作为分词 https://github.com/hankcs/HanLP
-
-TODO: 其他包的license...
+TODO: Other packages' license

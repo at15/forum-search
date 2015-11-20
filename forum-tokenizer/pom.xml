@@ -11,6 +11,10 @@
 
     <artifactId>forum-tokenizer</artifactId>
 
+    <description>
+        Tokenize forum threads using HanLP
+    </description>
+
     <dependencies>
         <dependency>
             <groupId>cn.edu.sjtu.at15</groupId>

@@ -11,5 +11,8 @@
 
     <artifactId>forum-common</artifactId>
 
+    <description>
+        common module that includes entity and util
+    </description>
 
 </project>

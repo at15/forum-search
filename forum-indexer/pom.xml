@@ -11,6 +11,10 @@
 
     <artifactId>forum-indexer</artifactId>
 
+    <description>
+        The mapreduce job for building index
+    </description>
+
     <properties>
         <mrunit.version>1.1.0</mrunit.version>
     </properties>

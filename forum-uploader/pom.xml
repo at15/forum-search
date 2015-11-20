@@ -11,6 +11,10 @@
 
     <artifactId>forum-uploader</artifactId>
 
+    <description>
+        Upload data to remote hdfs
+    </description>
+
     <build>
         <plugins>
             <plugin>
