@@ -1,10 +1,11 @@
 package cn.edu.sjtu.at15.forum.tokenizer;
 
+import cn.edu.sjtu.at15.forum.common.entity.Separator;
+
 /**
  * Created by gpl on 15/11/17.
  */
 public class Token {
-    public static final String SEP = ";";
     private String term;
     private Integer rank;
     private String url;
@@ -50,11 +51,11 @@ public class Token {
     }
 
     public String toInfo() {
-        return url + SEP + rank + SEP + position;
+        return url + Separator.ATTRIBUTE_SEP + rank + Separator.ATTRIBUTE_SEP + position;
     }
 
     public static Token fromInfo(String info, String term) {
-        String[] s = info.split(SEP);
+        String[] s = info.split(Separator.ATTRIBUTE_SEP);
         Token t = new Token();
         t.setTerm(term);
         t.setUrl(s[0]);

@@ -1,5 +1,6 @@
 package cn.edu.sjtu.at15.forum.tokenizer;
 
+import cn.edu.sjtu.at15.forum.common.entity.Separator;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
@@ -9,9 +10,6 @@ import java.util.List;
  * Created by gpl on 15/11/17.
  */
 public class TokenInThread {
-    public static final String SEP = ";";
-    public static final String POS_SEP = ",";
-
     private List<Integer> positions;
     private String term;
     private Integer rank = 0;
@@ -57,11 +55,11 @@ public class TokenInThread {
     }
 
     public String getPositionsAsString() {
-        return StringUtils.join(positions, POS_SEP);
+        return StringUtils.join(positions, Separator.POSITION_SEP);
     }
 
     public String toInfo() {
-        return url + SEP + rank + SEP + getPositionsAsString();
+        return url + Separator.ATTRIBUTE_SEP + rank + Separator.ATTRIBUTE_SEP + getPositionsAsString();
     }
 
     @Override

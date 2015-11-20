@@ -1,5 +1,6 @@
 package cn.edu.sjtu.at15.forum.indexer;
 
+import cn.edu.sjtu.at15.forum.common.entity.Separator;
 import cn.edu.sjtu.at15.forum.tokenizer.Token;
 import cn.edu.sjtu.at15.forum.tokenizer.TokenInThread;
 import org.apache.commons.lang.StringUtils;
@@ -19,7 +20,6 @@ public class ThreadReducer extends
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ThreadReducer.class);
 
-    public static final String THREAD_SEP = ";;";
     private Text result = new Text();
 
     public void reduce(Text key, Iterable<Text> values,
@@ -40,7 +40,7 @@ public class ThreadReducer extends
         }
         // merge all threads into multiple info
         Collection<TokenInThread> threads = urlTokenInThreadMap.values();
-        result.set(StringUtils.join(threads, THREAD_SEP));
+        result.set(StringUtils.join(threads, Separator.THREAD_SEP));
         context.write(key, result);
     }
 }
