@@ -37,6 +37,7 @@ public class DiscuzPageProcessor implements PageProcessor {
         }
 
         // deal with thread
+        // TODO: there are threads and thread comments, should be treated differently
         if (url.isThread(currentUrl)) {
             LOGGER.debug("processing thread");
             ForumThread thread = parseThread(page);
@@ -50,7 +51,7 @@ public class DiscuzPageProcessor implements PageProcessor {
         if (url.isList(currentUrl)) {
             LOGGER.debug("processing list page");
             // get the max page number
-            ListParser listParser = new ListParser(page.getHtml().toString());
+            ListParser listParser = new ListParser(page.getRawText());
             Integer maxPage = listParser.getMaxPage();
             LOGGER.debug("max page : " + maxPage);
             // TODO: add all the page links, since webmagic will handle the duplicate url
@@ -68,6 +69,7 @@ public class DiscuzPageProcessor implements PageProcessor {
                 }
                 // we don't consider nested list.
                 // otherwise we would need to deal with duplicate links and circle refs
+                // TODO: handle list pagination here.
             }
             return;
         }
@@ -76,7 +78,7 @@ public class DiscuzPageProcessor implements PageProcessor {
     // TODO: should get all the comments as well, but we don't have much time, so.
     protected static ForumThread parseThread(Page page) {
         ForumThread thread = new ForumThread();
-        ThreadParser threadParser = new ThreadParser(page.getHtml().toString());
+        ThreadParser threadParser = new ThreadParser(page.getRawText());
         thread.setUrl(page.getUrl().toString());
         String title = threadParser.getTitle();
         LOGGER.debug("thread title : " + title);

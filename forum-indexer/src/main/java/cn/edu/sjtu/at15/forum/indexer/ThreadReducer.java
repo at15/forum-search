@@ -28,7 +28,6 @@ public class ThreadReducer extends
         Map<String, TokenInThread> urlTokenInThreadMap = new HashMap<String, TokenInThread>();
         String term = key.toString();
         Token t;
-        LOGGER.debug("aaaaa");
         // merge terms in one thread first, this is in fact reducer
         for (Text val : values) {
             // TODO: this will cause error if we have combiner
