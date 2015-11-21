@@ -21,4 +21,13 @@ public class FileUtils {
             return "";
         }
     }
+
+    public static String readFileAsString(String path, String encoding) {
+        try {
+            byte[] encoded = Files.readAllBytes(Paths.get(path));
+            return new String(encoded, encoding);
+        } catch (IOException ex) {
+            return "";
+        }
+    }
 }

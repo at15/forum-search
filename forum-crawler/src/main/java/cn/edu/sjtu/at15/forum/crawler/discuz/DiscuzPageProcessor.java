@@ -1,5 +1,6 @@
 package cn.edu.sjtu.at15.forum.crawler.discuz;
 
+import cn.edu.sjtu.at15.forum.common.entity.ForumMainThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +39,14 @@ public class DiscuzPageProcessor implements PageProcessor {
         // deal with thread
         if (discuzUrl.isThread(currentUrl)) {
             LOGGER.debug("processing thread");
+            String mainThreadUrl;
+            if(discuzUrl.isMainThread(currentUrl)){
+                mainThreadUrl = currentUrl;
+                // TODO: parse using thread parser
+            }else{
+                mainThreadUrl = discuzUrl.getMainThreadUrl(currentUrl);
+                // TODO: parse use thread parser
+            }
             // TODO: there are threads and thread comments (sub thread), should be treated differently
             // put the logic in parseThread
 //            ForumThread thread = parseThread(page);
