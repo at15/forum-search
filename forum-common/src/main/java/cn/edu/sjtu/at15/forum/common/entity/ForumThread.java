@@ -1,6 +1,6 @@
 package cn.edu.sjtu.at15.forum.common.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
 
 /**
  * Created by at15 on 15-11-19.
@@ -9,21 +9,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 public class ForumThread {
     protected String url;
+    protected String mainThreadUrl;
     protected String title;
-    protected Integer viewCount;
-    protected Integer replyCount;
-    protected String author;
-    protected String authorPost;
-
-    @JsonIgnore
-    public boolean isValid() {
-        return (url != null) &&
-                (title != null) &&
-                (viewCount != null) &&
-                (replyCount != null) &&
-                (author != null) &&
-                (authorPost != null);
-    }
+    protected List<ForumPost> posts;
 
     public String getUrl() {
         return url;
@@ -31,6 +19,14 @@ public class ForumThread {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getMainThreadUrl() {
+        return mainThreadUrl;
+    }
+
+    public void setMainThreadUrl(String mainThreadUrl) {
+        this.mainThreadUrl = mainThreadUrl;
     }
 
     public String getTitle() {
@@ -41,44 +37,21 @@ public class ForumThread {
         this.title = title;
     }
 
-    public Integer getViewCount() {
-        return viewCount;
+
+    public List<ForumPost> getPosts() {
+        return posts;
     }
 
-    public void setViewCount(Integer viewCount) {
-        this.viewCount = viewCount;
+    public void setPosts(List<ForumPost> posts) {
+        this.posts = posts;
     }
 
-    public Integer getReplyCount() {
-        return replyCount;
-    }
-
-    public void setReplyCount(Integer replyCount) {
-        this.replyCount = replyCount;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getAuthorPost() {
-        return authorPost;
-    }
-
-    public void setAuthorPost(String authorPost) {
-        this.authorPost = authorPost;
-    }
-
-    @Override
-    public String toString() {
-        return "\ntitle : " + getTitle() + "\n" +
-                "author : " + getAuthor() + "\n" +
-                "view count : " + getViewCount() + "\n" +
-                "reply count : " + getReplyCount() + "\n" +
-                "author post : " + getAuthorPost() + "\n";
-    }
+//    @Override
+//    public String toString() {
+//        return "\ntitle : " + getTitle() + "\n" +
+//                "author : " + getAuthor() + "\n" +
+//                "view count : " + getViewCount() + "\n" +
+//                "reply count : " + getReplyCount() + "\n" +
+//                "author post : " + getAuthorPost() + "\n";
+//    }
 }

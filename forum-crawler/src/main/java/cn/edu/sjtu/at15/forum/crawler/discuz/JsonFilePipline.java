@@ -30,13 +30,13 @@ public class JsonFilePipline implements Pipeline {
         ForumThread thread = resultItems.get("thread");
         try {
             write(thread);
-        }catch (IOException ex){
-            LOGGER.warn("unable to save thread to file due to ",ex);
+        } catch (IOException ex) {
+            LOGGER.warn("unable to save thread to file due to ", ex);
         }
     }
 
     public void write(ForumThread thread) throws IOException {
-        if (!thread.isValid()) {
+        if (thread.getUrl() == null) {
             throw new InvalidObjectException("thread is not valid, lack some attrs like url");
         }
         write(thread.getUrl(), thread);

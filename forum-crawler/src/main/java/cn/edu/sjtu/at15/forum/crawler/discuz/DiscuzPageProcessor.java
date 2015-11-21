@@ -34,16 +34,17 @@ public class DiscuzPageProcessor implements PageProcessor {
         LOGGER.debug("processing page : " + currentUrl);
 
         if (!url.isInnerLink(currentUrl)) {
-            LOGGER.debug("not inner link ignore : " + currentUrl);
+            LOGGER.debug("ignore outer link : " + currentUrl);
             return;
         }
 
         // deal with thread
         if (url.isThread(currentUrl)) {
             LOGGER.debug("processing thread");
-            // TODO: there are threads and thread comments, should be treated differently
+            // TODO: there are threads and thread comments (sub thread), should be treated differently
             // put the logic in parseThread
             ForumThread thread = parseThread(page);
+            // store data for pipeline
             page.putField("url", currentUrl);
             page.putField("thread", thread);
             return;
