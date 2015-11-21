@@ -11,20 +11,27 @@ import org.junit.Test;
 public class ThreadParserTest {
     private String mainThreadContent;
     private String subThreadContent;
+    private ThreadParser subThreadParser;
+    private MainThreadParser mainThreadParser;
 
     @Before
     public void setUp() {
         mainThreadContent = FileUtils.readFileAsString("fixture/thread-main.html", "GBK");
         subThreadContent = FileUtils.readFileAsString("fixture/thread-page-2.html", "GBK");
+        subThreadParser = new ThreadParser(subThreadContent);
+        mainThreadParser = new MainThreadParser(mainThreadContent);
     }
 
     @Test
     public void testParseTitle() {
-        ThreadParser parser = new ThreadParser(subThreadContent);
-        Assert.assertEquals("USC Viterbi School内转CS 的可行性求教！！", parser.getTitle());
+        Assert.assertEquals("USC Viterbi School内转CS 的可行性求教！！", subThreadParser.getTitle());
+        Assert.assertEquals(subThreadParser.getTitle(), mainThreadParser.getTitle());
+    }
 
-        MainThreadParser mainThreadParser = new MainThreadParser(mainThreadContent);
-        Assert.assertEquals(parser.getTitle(),mainThreadParser.getTitle());
-
+    @Test
+    public void testAuthor() {
+        Assert.assertEquals("ryanbia", mainThreadParser.getThread("dummy url").getAuthor());
+        Assert.assertEquals(mainThreadParser.getPosts().get(0).getAuthor(),
+                mainThreadParser.getThread("dummy").getAuthor());
     }
 }

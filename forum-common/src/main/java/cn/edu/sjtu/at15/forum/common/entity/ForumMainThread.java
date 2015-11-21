@@ -9,6 +9,12 @@ public class ForumMainThread extends ForumThread {
     protected Integer viewCount;
     protected Integer replyCount;
 
+    public ForumMainThread(ForumThread thread){
+        setUrl(thread.getUrl());
+        setTitle(thread.getTitle());
+        setPosts(thread.getPosts());
+    }
+
     // for main thread, it's url and main thread url is the same
     @Override
     public void setUrl(String url) {

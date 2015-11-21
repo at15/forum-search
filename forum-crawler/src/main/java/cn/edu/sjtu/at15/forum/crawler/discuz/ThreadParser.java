@@ -1,10 +1,15 @@
 package cn.edu.sjtu.at15.forum.crawler.discuz;
 
-import cn.edu.sjtu.at15.forum.common.entity.ForumMainThread;
+import cn.edu.sjtu.at15.forum.common.entity.ForumPost;
 import cn.edu.sjtu.at15.forum.common.entity.ForumThread;
 import cn.edu.sjtu.at15.forum.crawler.Parser;
+import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Created by at15 on 15-11-19.
@@ -12,56 +17,52 @@ import org.slf4j.LoggerFactory;
 public class ThreadParser extends Parser {
     private static final Logger LOGGER = LoggerFactory.getLogger(ThreadParser.class);
     private String title;
+    private List<ForumPost> posts;
 
     public ThreadParser(String html) {
         super(html);
-        title = document.select("span#thread_subject").text();
-        // parse all the posts
+        parse();
+    }
 
-//        author = document.select("#postlist > div").first()
-//                .select("div.authi > a.xi2").text();
-//        // TODO: clear the ads using http://jsoup.org/cookbook/modifying-data/set-text
-//        authorPost = document.select("#postlist > div").first()
-//                .select("td.t_f").text();
+    protected void parse() {
+        title = document.select("span#thread_subject").text();
+
+        // parse all the posts
+        posts = new ArrayList<ForumPost>();
+        String author;
+        String content;
+        Element postElement;
+
+        ListIterator<Element> postsIterator = document.select("#postlist > div").listIterator();
+        while (postsIterator.hasNext()) {
+            postElement = postsIterator.next();
+            author = postElement.select("div.authi > a.xi2").text();
+            // TODO: clear the ads using http://jsoup.org/cookbook/modifying-data/set-text
+            content = postElement.select("td.t_f").text();
+            // filter the reply box
+            if (author == null || author.equals("")) {
+                continue;
+            }
+            posts.add(new ForumPost(author, content));
+//            LOGGER.debug(author);
+//            LOGGER.debug(content);
+        }
     }
 
     public String getTitle() {
         return title;
     }
 
-//    public String getAuthor() {
-//        return author;
-//    }
-//
-//    public Integer getViewCount() {
-//        return viewCount;
-//    }
-//
-//    public Integer getReplyCount() {
-//        return replyCount;
-//    }
-//
-//    public String getAuthorPost() {
-//        return authorPost;
-//    }
+    public List<ForumPost> getPosts() {
+        return posts;
+    }
 
-//    protected void parseThread() {
-//
-//    }
-//
-//    protected void parseMainThread() {
-//        parseThread();
-
-//    }
-//
-//    public static ForumMainThread parseAsMainThread(String html) {
-//        ThreadParser parser = new ThreadParser(html);
-//        parser.parseMainThread();
-//        // TODO: assign all the attributes, or have a better way to share data
-//        return new ForumMainThread();
-//    }
-//
-//    public static ForumThread parseAsThread(String html) {
-//        return new ForumThread();
-//    }
+    public ForumThread getThread(String url, String mainThreadUrl) {
+        ForumThread thread = new ForumThread();
+        thread.setUrl(url);
+        thread.setMainThreadUrl(mainThreadUrl);
+        thread.setTitle(getTitle());
+        thread.setPosts(getPosts());
+        return thread;
+    }
 }

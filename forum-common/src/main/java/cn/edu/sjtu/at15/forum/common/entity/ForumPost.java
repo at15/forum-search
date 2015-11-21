@@ -1,5 +1,7 @@
 package cn.edu.sjtu.at15.forum.common.entity;
 
+import cn.edu.sjtu.at15.forum.common.StringUtils;
+
 /**
  * Created by at15 on 15-11-21.
  * <p/>
@@ -8,6 +10,14 @@ package cn.edu.sjtu.at15.forum.common.entity;
 public class ForumPost {
     protected String author;
     protected String content;
+
+    public ForumPost() {
+    }
+
+    public ForumPost(String author, String content) {
+        this.author = author;
+        this.content = content;
+    }
 
     public String getAuthor() {
         return author;
