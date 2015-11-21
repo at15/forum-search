@@ -66,9 +66,9 @@ public class DiscuzThreadTokenizer {
             ForumThread thread = mapper.readValue(json, ForumThread.class);
             // TODO: title and post should be treated differently
             List<Token> title = tokenize(thread.getTitle(), thread.getUrl());
-            List<Token> authorPost = tokenize(thread.getAuthorPost(), thread.getUrl());
+//            List<Token> authorPost = tokenize(thread.getAuthorPost(), thread.getUrl());
             tokens.addAll(title);
-            tokens.addAll(authorPost);
+//            tokens.addAll(authorPost);
         } catch (IOException ex) {
             LOGGER.warn("wrong json format for thread ", ex);
             // TODO: return null or an empty list?

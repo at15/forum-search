@@ -21,14 +21,14 @@ public class ThreadReducerTest {
         reduceDriver = ReduceDriver.newReduceDriver(reducer);
     }
 
-    @Test
-    public void testReducer() throws IOException {
-        List<Text> values = new ArrayList<Text>();
-        values.add(new Text("http://www.baidu.com;250;0"));
-        values.add(new Text("http://www.baidu.com;250;1"));
-        values.add(new Text("http://www.google.com;250;1"));
-        reduceDriver.withInput(new Text("a"), values);
-        reduceDriver.withOutput(new Text("a"), new Text("http://www.baidu.com;250;0,1;;http://www.google.com;250;1"));
-        reduceDriver.runTest();
-    }
+//    @Test
+//    public void testReducer() throws IOException {
+//        List<Text> values = new ArrayList<Text>();
+//        values.add(new Text("http://www.baidu.com;250;0"));
+//        values.add(new Text("http://www.baidu.com;250;1"));
+//        values.add(new Text("http://www.google.com;250;1"));
+//        reduceDriver.withInput(new Text("a"), values);
+//        reduceDriver.withOutput(new Text("a"), new Text("http://www.baidu.com;250;0,1;;http://www.google.com;250;1"));
+//        reduceDriver.runTest();
+//    }
 }

@@ -16,6 +16,10 @@ public class Url extends cn.edu.sjtu.at15.forum.crawler.Url {
         return url.startsWith(baseUrl + "/thread-");
     }
 
+    public boolean isMainThread(String url){
+        return false;
+    }
+
     // FIXME: this only works for one url
     public boolean isList(String url) {
         return url.startsWith(baseUrl + "/forum.php?mod=guide");

@@ -1,5 +1,7 @@
 package cn.edu.sjtu.at15.forum.common.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Created by at15 on 15-11-21.
  */
@@ -33,5 +35,16 @@ public class ForumMainThread extends ForumThread {
 
     public void setReplyCount(Integer replyCount) {
         this.replyCount = replyCount;
+    }
+
+    // the first post in main thread is author post
+    @JsonIgnore
+    public ForumPost getAuthorPost() {
+        return getPosts().get(0);
+    }
+
+    @JsonIgnore
+    public String getAuthor() {
+        return getAuthorPost().getAuthor();
     }
 }

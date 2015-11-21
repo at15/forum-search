@@ -43,10 +43,10 @@ public class DiscuzPageProcessor implements PageProcessor {
             LOGGER.debug("processing thread");
             // TODO: there are threads and thread comments (sub thread), should be treated differently
             // put the logic in parseThread
-            ForumThread thread = parseThread(page);
+//            ForumThread thread = parseThread(page);
             // store data for pipeline
             page.putField("url", currentUrl);
-            page.putField("thread", thread);
+//            page.putField("thread", thread);
             return;
         }
 
@@ -73,27 +73,27 @@ public class DiscuzPageProcessor implements PageProcessor {
     }
 
     // TODO: should get all the comments as well, but we don't have much time, so.
-    protected static ForumThread parseThread(Page page) {
-        ForumThread thread = new ForumThread();
-        ThreadParser threadParser = new ThreadParser(page.getRawText());
-        thread.setUrl(page.getUrl().toString());
-        String title = threadParser.getTitle();
-        LOGGER.debug("thread title : " + title);
-        thread.setTitle(title);
-        String author = threadParser.getAuthor();
-        thread.setAuthor(author);
-        LOGGER.debug("thread author : " + author);
-        Integer viewCount = threadParser.getViewCount();
-        thread.setViewCount(viewCount);
-        LOGGER.debug("thread view count : " + viewCount);
-        Integer replyCount = threadParser.getReplyCount();
-        thread.setReplyCount(replyCount);
-        LOGGER.debug("thread reply count : " + replyCount);
-        String authorPost = threadParser.getAuthorPost();
-        thread.setAuthorPost(authorPost);
-        LOGGER.debug(authorPost);
-        return thread;
-    }
+//    protected static ForumThread parseThread(Page page) {
+//        ForumThread thread = new ForumThread();
+//        ThreadParser threadParser = new ThreadParser(page.getRawText());
+//        thread.setUrl(page.getUrl().toString());
+//        String title = threadParser.getTitle();
+//        LOGGER.debug("thread title : " + title);
+//        thread.setTitle(title);
+//        String author = threadParser.getAuthor();
+//        thread.setAuthor(author);
+//        LOGGER.debug("thread author : " + author);
+//        Integer viewCount = threadParser.getViewCount();
+//        thread.setViewCount(viewCount);
+//        LOGGER.debug("thread view count : " + viewCount);
+//        Integer replyCount = threadParser.getReplyCount();
+//        thread.setReplyCount(replyCount);
+//        LOGGER.debug("thread reply count : " + replyCount);
+//        String authorPost = threadParser.getAuthorPost();
+//        thread.setAuthorPost(authorPost);
+//        LOGGER.debug(authorPost);
+//        return thread;
+//    }
 
     public static void main(String[] args) throws Exception {
         Spider.create(new DiscuzPageProcessor("http://www.1point3acres.com/bbs/"))
