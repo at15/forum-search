@@ -35,6 +35,9 @@ public class DiscuzUrlTest {
                 .isMainThread(mainThreadUrl));
         Assert.assertEquals(false, discuzUrl
                 .isMainThread(subThreadUrl));
+
+        String mainFromSub = discuzUrl.getMainThreadUrl(subThreadUrl);
+        Assert.assertEquals(mainThreadUrl, mainFromSub);
     }
 
     @Test
@@ -49,9 +52,12 @@ public class DiscuzUrlTest {
     public void testRegexp() {
 //        String p = "http://www.1point3acres.com/bbs/thread-147140-1-1.html";
         String p = "http://www.1point3acres.com/bbs/thread-147140-2-1.html";
-        Pattern pattern = Pattern.compile("/thread-(\\d+)-1-(\\d+)");
+        Pattern pattern = DiscuzUrl.threadUrlPattern;
         Matcher m = pattern.matcher(p);
+        StringBuffer sb = new StringBuffer();
         if (m.find()) {
+            // try to replace the page number
+
             System.out.println("got");
         } else {
             System.out.println("not found");

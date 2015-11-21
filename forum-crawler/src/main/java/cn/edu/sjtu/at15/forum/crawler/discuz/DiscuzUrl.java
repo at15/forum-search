@@ -9,24 +9,37 @@ import cn.edu.sjtu.at15.forum.crawler.Url;
  * Created by gpl on 15/11/14.
  */
 public class DiscuzUrl extends Url {
-    private static final Pattern mainThreadPattern = Pattern.compile("/thread-(\\d+)-1-(\\d+)");
+    public static final Pattern threadUrlPattern = Pattern.compile("/thread-(\\d+)-(\\d+)-(.*)");
 
     public DiscuzUrl(String baseUrl) {
         super(baseUrl);
     }
 
-    // FIXME: http://www.1point3acres.com/bbs/thread-146437-5-1.html is not the first page for thread.
-    // it's the comment page, so the parser will got error.
     public boolean isThread(String url) {
         return url.startsWith(baseUrl + "/thread-");
     }
 
     public boolean isMainThread(String url) {
-        Matcher m = mainThreadPattern.matcher(url);
-        return m.find();
+        Matcher m = threadUrlPattern.matcher(url);
+        if (!m.find() || m.group(2) == null) {
+            return false;
+        }
+        String page = m.group(2);
+        return page.equals("1");
+    }
+
+    public String getMainThreadUrl(String url) {
+        Matcher m = threadUrlPattern.matcher(url);
+        if (m.find()) {
+            return baseUrl + "/thread-" + m.group(1) + "-1-" + m.group(3);
+
+        } else {
+            throw new IllegalArgumentException("not a valid sub thread url:" + url);
+        }
     }
 
     // FIXME: this only works for one url
+    // TODO: remove this usage, use ListParser instead
     public boolean isList(String url) {
         return url.startsWith(baseUrl + "/forum.php?mod=guide");
     }
