@@ -51,6 +51,7 @@ public class DiscuzPageProcessor implements PageProcessor {
         if (discuzUrl.isThread(currentUrl)) {
             LOGGER.debug("processing thread");
             page.putField("url", currentUrl);
+            // give some default value
             page.putField("main-thread", null);
             page.putField("thread", null);
 
@@ -70,6 +71,7 @@ public class DiscuzPageProcessor implements PageProcessor {
         // try to parse as thread list
         ThreadListParser threadListParser = new ThreadListParser(html, discuzUrl.getBaseUrl());
         if (threadListParser.hasThreads()) {
+            LOGGER.debug("has threads in : " + currentUrl);
             page.addTargetRequests(threadListParser.getThreadLinks());
             return;
         }
@@ -87,8 +89,8 @@ public class DiscuzPageProcessor implements PageProcessor {
 
     public static void main(String[] args) throws Exception {
         Spider.create(new DiscuzPageProcessor("http://www.1point3acres.com/bbs/"))
-//                .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
-                .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
+                .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
+//                .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
 //                .addUrl("http://www.1point3acres.com/bbs/thread-147944-2-1.html")
 //                .addPipeline(new ConsolePipeline())
                 .addPipeline(new JsonFilePipeline("data"))

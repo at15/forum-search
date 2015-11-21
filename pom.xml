@@ -27,6 +27,7 @@
         <slf4j.version>1.7.12</slf4j.version>
         <junit.version>4.11</junit.version>
         <commons.configuration.version>1.9</commons.configuration.version>
+        <commons.codec.version>1.10</commons.codec.version>
         <hadoop.version>2.7.1</hadoop.version>
         <jackson.version>2.6.1</jackson.version>
         <hanlp.version>portable-1.2.7</hanlp.version>
@@ -39,6 +40,11 @@
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
             <version>${commons.configuration.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons.codec.version}</version>
         </dependency>
 
         <!-- use logback for log-->
@@ -72,26 +78,6 @@
             <artifactId>assertj-core</artifactId>
             <version>${assertj.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <!-- hadoop -->
-        <!-- hadoop client -->
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-client</artifactId>
-            <version>${hadoop.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- hadoop hdfs -->
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-hdfs</artifactId>
-            <version>${hadoop.version}</version>
         </dependency>
 
         <!-- json -->
