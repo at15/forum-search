@@ -37,10 +37,4 @@ public class DiscuzUrl extends Url {
             throw new IllegalArgumentException("not a valid sub thread url:" + url);
         }
     }
-
-    // FIXME: this only works for one url
-    // TODO: remove this usage, use ListParser instead
-    public boolean isList(String url) {
-        return url.startsWith(baseUrl + "/forum.php?mod=guide");
-    }
 }

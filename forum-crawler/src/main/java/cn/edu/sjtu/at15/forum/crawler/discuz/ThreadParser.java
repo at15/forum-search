@@ -3,6 +3,7 @@ package cn.edu.sjtu.at15.forum.crawler.discuz;
 import cn.edu.sjtu.at15.forum.common.entity.ForumPost;
 import cn.edu.sjtu.at15.forum.common.entity.ForumThread;
 import cn.edu.sjtu.at15.forum.crawler.Parser;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,11 @@ public class ThreadParser extends Parser {
 
     public ThreadParser(String html) {
         super(html);
+        parse();
+    }
+
+    public ThreadParser(Document document) {
+        super(document);
         parse();
     }
 

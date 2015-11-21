@@ -41,14 +41,6 @@ public class DiscuzUrlTest {
     }
 
     @Test
-    public void testList() {
-        Assert.assertEquals(true, discuzUrl
-                .isList("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot"));
-        Assert.assertEquals(false, discuzUrl
-                .isList("http://www.1point3acres.com/bbs/come_on_baby_lets_xx"));
-    }
-
-    @Test
     public void testRegexp() {
 //        String p = "http://www.1point3acres.com/bbs/thread-147140-1-1.html";
         String p = "http://www.1point3acres.com/bbs/thread-147140-2-1.html";

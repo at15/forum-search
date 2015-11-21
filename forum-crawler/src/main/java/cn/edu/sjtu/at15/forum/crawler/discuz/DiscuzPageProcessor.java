@@ -2,6 +2,7 @@ package cn.edu.sjtu.at15.forum.crawler.discuz;
 
 import cn.edu.sjtu.at15.forum.common.entity.ForumMainThread;
 import cn.edu.sjtu.at15.forum.common.entity.ForumThread;
+import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,6 +38,15 @@ public class DiscuzPageProcessor implements PageProcessor {
             return;
         }
 
+        // deal with pagination first for both thread and threadList, add the links if it does have pagination
+        PaginationParser paginationParser = new PaginationParser(html);
+        if (paginationParser.hasPagination()) {
+            page.addTargetRequests(paginationParser.getPageLinks());
+        }
+
+        // use the parsed document
+        Document document = paginationParser.getDocument();
+
         // deal with thread
         if (discuzUrl.isThread(currentUrl)) {
             LOGGER.debug("processing thread");
@@ -44,36 +54,24 @@ public class DiscuzPageProcessor implements PageProcessor {
             page.putField("main-thread", null);
             page.putField("thread", null);
 
-            PaginationParser paginationParser;
             if (discuzUrl.isMainThread(currentUrl)) {
-                MainThreadParser mainThreadParser = new MainThreadParser(html);
+                MainThreadParser mainThreadParser = new MainThreadParser(document);
                 ForumMainThread forumMainThread = mainThreadParser.getThread(currentUrl);
                 page.putField("main-thread", forumMainThread);
-                paginationParser = new PaginationParser(mainThreadParser.getDocument());
             } else {
                 String mainThreadUrl = discuzUrl.getMainThreadUrl(currentUrl);
-                ThreadParser threadParser = new ThreadParser(html);
+                ThreadParser threadParser = new ThreadParser(document);
                 ForumThread forumThread = threadParser.getThread(currentUrl, mainThreadUrl);
                 page.putField("thread", forumThread);
-                paginationParser = new PaginationParser(threadParser.getDocument());
-            }
-
-            // add the reset pages
-            if (paginationParser.hasPagination()) {
-                page.addTargetRequests(paginationParser.getPageLinks());
             }
             return;
         }
 
-        // try to parse as a list page
-        try {
-            ListParser listParser = new ListParser(html);
-            // get all the pages for list from pagination
-            page.addTargetRequests(listParser.getPageLinks());
-            page.addTargetRequests(listParser.getThreadLinks());
+        // try to parse as thread list
+        ThreadListParser threadListParser = new ThreadListParser(html, discuzUrl.getBaseUrl());
+        if (threadListParser.hasThreads()) {
+            page.addTargetRequests(threadListParser.getThreadLinks());
             return;
-        } catch (IllegalArgumentException ignore) {
-            LOGGER.warn("not a list page : " + currentUrl);
         }
 
         // this is other type of pages, we just simply add all inner links

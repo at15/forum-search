@@ -1,6 +1,7 @@
 package cn.edu.sjtu.at15.forum.crawler.discuz;
 
 import cn.edu.sjtu.at15.forum.common.entity.ForumMainThread;
+import org.jsoup.nodes.Document;
 
 /**
  * Created by at15 on 15-11-21.
@@ -11,6 +12,11 @@ public class MainThreadParser extends ThreadParser {
 
     public MainThreadParser(String html) {
         super(html);
+        parseMainThreadExtra();
+    }
+
+    public MainThreadParser(Document document){
+        super(document);
         parseMainThreadExtra();
     }
 
