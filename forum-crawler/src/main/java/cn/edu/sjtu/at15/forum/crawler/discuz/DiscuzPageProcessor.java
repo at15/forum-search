@@ -88,13 +88,30 @@ public class DiscuzPageProcessor implements PageProcessor {
     }
 
     public static void main(String[] args) throws Exception {
-        Spider.create(new DiscuzPageProcessor("http://www.1point3acres.com/bbs/"))
-                .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
-//                .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
-//                .addUrl("http://www.1point3acres.com/bbs/thread-147944-2-1.html")
-//                .addPipeline(new ConsolePipeline())
-                .addPipeline(new JsonFilePipeline("data"))
-                .thread(5)
+        // java -jar forum-crawler-0.0.2.jar
+        String baseUrl = args[0];
+        String startUrl = args[1];
+        String dataFolder = args[2];
+        Integer threadNumber = Integer.valueOf(args[3]);
+
+        LOGGER.info("baseUrl " + baseUrl + "\n"
+                + "start url : " + startUrl + "\n"
+                + "data folder : " + dataFolder + "\n"
+                + "thread : " + threadNumber);
+
+//        Spider.create(new DiscuzPageProcessor("http://www.1point3acres.com/bbs/"))
+//                .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
+////                .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
+////                .addUrl("http://www.1point3acres.com/bbs/thread-147944-2-1.html")
+////                .addPipeline(new ConsolePipeline())
+//                .addPipeline(new JsonFilePipeline("data"))
+//                .thread(5)
+//                .run();
+
+        Spider.create(new DiscuzPageProcessor(baseUrl))
+                .addUrl(startUrl)
+                .addPipeline(new JsonFilePipeline(dataFolder))
+                .thread(threadNumber)
                 .run();
     }
 }
