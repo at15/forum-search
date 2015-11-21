@@ -80,36 +80,13 @@ public class DiscuzPageProcessor implements PageProcessor {
         }
     }
 
-    // TODO: should get all the comments as well, but we don't have much time, so.
-//    protected static ForumThread parseThread(Page page) {
-//        ForumThread thread = new ForumThread();
-//        ThreadParser threadParser = new ThreadParser(page.getRawText());
-//        thread.setUrl(page.getUrl().toString());
-//        String title = threadParser.getTitle();
-//        LOGGER.debug("thread title : " + title);
-//        thread.setTitle(title);
-//        String author = threadParser.getAuthor();
-//        thread.setAuthor(author);
-//        LOGGER.debug("thread author : " + author);
-//        Integer viewCount = threadParser.getViewCount();
-//        thread.setViewCount(viewCount);
-//        LOGGER.debug("thread view count : " + viewCount);
-//        Integer replyCount = threadParser.getReplyCount();
-//        thread.setReplyCount(replyCount);
-//        LOGGER.debug("thread reply count : " + replyCount);
-//        String authorPost = threadParser.getAuthorPost();
-//        thread.setAuthorPost(authorPost);
-//        LOGGER.debug(authorPost);
-//        return thread;
-//    }
-
     public static void main(String[] args) throws Exception {
         Spider.create(new DiscuzPageProcessor("http://www.1point3acres.com/bbs/"))
 //                .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
 //                .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
                 .addUrl("http://www.1point3acres.com/bbs/thread-147944-2-1.html")
 //                .addPipeline(new ConsolePipeline())
-                .addPipeline(new JsonFilePipline("data"))
+                .addPipeline(new JsonFilePipeline("data"))
                 .thread(5)
                 .run();
     }

@@ -18,12 +18,12 @@ import java.io.InvalidObjectException;
 /**
  * Created by gpl on 15/11/16.
  */
-public class JsonFilePipline implements Pipeline {
-    private final static Logger LOGGER = LoggerFactory.getLogger(JsonFilePipline.class);
+public class JsonFilePipeline implements Pipeline {
+    private final static Logger LOGGER = LoggerFactory.getLogger(JsonFilePipeline.class);
     private final String baseFolder;
     private final static ObjectMapper mapper = new ObjectMapper();
 
-    public JsonFilePipline(String baseFolder) {
+    public JsonFilePipeline(String baseFolder) {
         this.baseFolder = baseFolder;
     }
 

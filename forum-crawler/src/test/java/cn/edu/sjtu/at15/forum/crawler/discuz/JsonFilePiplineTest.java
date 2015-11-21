@@ -17,7 +17,7 @@ public class JsonFilePiplineTest {
 //        thread.setViewCount(100);
 //        thread.setReplyCount(100);
 //        thread.setAuthorPost("this is some dummy content");
-//        JsonFilePipline pipline = new JsonFilePipline("data");
+//        JsonFilePipeline pipline = new JsonFilePipeline("data");
 //        pipline.write("a.baidu.com", thread);
 //
 //        thread.setUrl("http://www.baidu.com");
