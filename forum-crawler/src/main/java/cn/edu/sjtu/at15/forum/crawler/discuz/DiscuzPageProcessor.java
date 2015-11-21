@@ -1,6 +1,7 @@
 package cn.edu.sjtu.at15.forum.crawler.discuz;
 
 import cn.edu.sjtu.at15.forum.common.entity.ForumMainThread;
+import cn.edu.sjtu.at15.forum.common.entity.ForumThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,20 +40,21 @@ public class DiscuzPageProcessor implements PageProcessor {
         // deal with thread
         if (discuzUrl.isThread(currentUrl)) {
             LOGGER.debug("processing thread");
-            String mainThreadUrl;
-            if(discuzUrl.isMainThread(currentUrl)){
-                mainThreadUrl = currentUrl;
-                // TODO: parse using thread parser
-            }else{
-                mainThreadUrl = discuzUrl.getMainThreadUrl(currentUrl);
-                // TODO: parse use thread parser
-            }
-            // TODO: there are threads and thread comments (sub thread), should be treated differently
-            // put the logic in parseThread
-//            ForumThread thread = parseThread(page);
-            // store data for pipeline
             page.putField("url", currentUrl);
-//            page.putField("thread", thread);
+            page.putField("main-thread", null);
+            page.putField("thread", null);
+
+            // TODO: get all the pages for one thread
+            if (discuzUrl.isMainThread(currentUrl)) {
+                MainThreadParser mainThreadParser = new MainThreadParser(html);
+                ForumMainThread forumMainThread = mainThreadParser.getThread(currentUrl);
+                page.putField("main-thread", forumMainThread);
+            } else {
+                String mainThreadUrl = discuzUrl.getMainThreadUrl(currentUrl);
+                ThreadParser threadParser = new ThreadParser(html);
+                ForumThread forumThread = threadParser.getThread(currentUrl, mainThreadUrl);
+                page.putField("thread", forumThread);
+            }
             return;
         }
 
@@ -104,7 +106,8 @@ public class DiscuzPageProcessor implements PageProcessor {
     public static void main(String[] args) throws Exception {
         Spider.create(new DiscuzPageProcessor("http://www.1point3acres.com/bbs/"))
 //                .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
-                .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
+//                .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
+                .addUrl("http://www.1point3acres.com/bbs/thread-147944-2-1.html")
 //                .addPipeline(new ConsolePipeline())
                 .addPipeline(new JsonFilePipline("data"))
                 .thread(5)

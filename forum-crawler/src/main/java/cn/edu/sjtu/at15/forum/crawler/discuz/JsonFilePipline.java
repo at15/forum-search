@@ -1,5 +1,6 @@
 package cn.edu.sjtu.at15.forum.crawler.discuz;
 
+import cn.edu.sjtu.at15.forum.common.entity.ForumMainThread;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,9 +28,20 @@ public class JsonFilePipline implements Pipeline {
     }
 
     public void process(ResultItems resultItems, Task task) {
-        ForumThread thread = resultItems.get("thread");
         try {
-            write(thread);
+            ForumThread thread = resultItems.get("thread");
+            if (thread != null) {
+                write(thread);
+            }
+        } catch (IOException ex) {
+            LOGGER.warn("unable to save thread to file due to ", ex);
+        }
+
+        try {
+            ForumMainThread mainThread = resultItems.get("main-thread");
+            if (mainThread != null) {
+                write(mainThread);
+            }
         } catch (IOException ex) {
             LOGGER.warn("unable to save thread to file due to ", ex);
         }
@@ -44,7 +56,13 @@ public class JsonFilePipline implements Pipeline {
 
     public void write(String url, ForumThread thread) throws IOException {
         LOGGER.debug("current directory " + System.getProperty("user.dir"));
-        File file = new File(baseFolder + "/" + StringUtils.encodeBase64(url) + ".json");
+        String fileName;
+        if (thread instanceof ForumMainThread) {
+            fileName = baseFolder + "/main-" + StringUtils.encodeBase64(url) + ".json";
+        } else {
+            fileName = baseFolder + "/sub-" + StringUtils.encodeBase64(url) + ".json";
+        }
+        File file = new File(fileName);
         if (!file.exists()) {
             file.createNewFile();
         }
