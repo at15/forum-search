@@ -6,7 +6,7 @@ import org.jsoup.nodes.Document;
 /**
  * Created by at15 on 15-11-20.
  */
-public class Parser {
+public abstract class Parser {
     protected Document document;
 
     public Parser(String html) {
@@ -14,6 +14,10 @@ public class Parser {
     }
 
     public Parser(Document document) {
-        document = document;
+        this.document = document;
+    }
+
+    public Document getDocument() {
+        return document;
     }
 }

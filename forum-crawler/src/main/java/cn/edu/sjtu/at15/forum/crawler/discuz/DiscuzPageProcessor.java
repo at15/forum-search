@@ -44,16 +44,23 @@ public class DiscuzPageProcessor implements PageProcessor {
             page.putField("main-thread", null);
             page.putField("thread", null);
 
-            // TODO: get all the pages for one thread
+            PaginationParser paginationParser;
             if (discuzUrl.isMainThread(currentUrl)) {
                 MainThreadParser mainThreadParser = new MainThreadParser(html);
                 ForumMainThread forumMainThread = mainThreadParser.getThread(currentUrl);
                 page.putField("main-thread", forumMainThread);
+                paginationParser = new PaginationParser(mainThreadParser.getDocument());
             } else {
                 String mainThreadUrl = discuzUrl.getMainThreadUrl(currentUrl);
                 ThreadParser threadParser = new ThreadParser(html);
                 ForumThread forumThread = threadParser.getThread(currentUrl, mainThreadUrl);
                 page.putField("thread", forumThread);
+                paginationParser = new PaginationParser(threadParser.getDocument());
+            }
+
+            // add the reset pages
+            if (paginationParser.hasPagination()) {
+                page.addTargetRequests(paginationParser.getPageLinks());
             }
             return;
         }
@@ -83,8 +90,8 @@ public class DiscuzPageProcessor implements PageProcessor {
     public static void main(String[] args) throws Exception {
         Spider.create(new DiscuzPageProcessor("http://www.1point3acres.com/bbs/"))
 //                .addUrl("http://www.1point3acres.com/bbs/forum.php?mod=guide&view=hot")
-//                .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
-                .addUrl("http://www.1point3acres.com/bbs/thread-147944-2-1.html")
+                .addUrl("http://www.1point3acres.com/bbs/thread-147944-1-1.html")
+//                .addUrl("http://www.1point3acres.com/bbs/thread-147944-2-1.html")
 //                .addPipeline(new ConsolePipeline())
                 .addPipeline(new JsonFilePipeline("data"))
                 .thread(5)

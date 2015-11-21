@@ -1,6 +1,7 @@
 package cn.edu.sjtu.at15.forum.crawler.discuz;
 
 import cn.edu.sjtu.at15.forum.crawler.Parser;
+import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.util.ArrayList;
@@ -15,6 +16,15 @@ public class PaginationParser extends Parser {
 
     public PaginationParser(String html) {
         super(html);
+        parse();
+    }
+
+    public PaginationParser(Document document) {
+        super(document);
+        parse();
+    }
+
+    protected void parse() {
         ListIterator<Element> linksIterator = document.select("div.pg>a").listIterator();
         while (linksIterator.hasNext()) {
             pageLinks.add(linksIterator.next().attr("href"));
