@@ -6,7 +6,7 @@ import org.junit.Test;
 /**
  * Created by at15 on 15-11-20.
  */
-public class UrlTest {
+public class DiscuzUrlTest {
     private final Url url = new Url("http://www.1point3acres.com/bbs/");
 
     @Test

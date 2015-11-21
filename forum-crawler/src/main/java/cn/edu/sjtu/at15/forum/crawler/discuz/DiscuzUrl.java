@@ -1,12 +1,17 @@
 package cn.edu.sjtu.at15.forum.crawler.discuz;
 
-import cn.edu.sjtu.at15.forum.common.StringUtils;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import cn.edu.sjtu.at15.forum.crawler.Url;
 
 /**
  * Created by gpl on 15/11/14.
  */
-public class Url extends cn.edu.sjtu.at15.forum.crawler.Url {
-    public Url(String baseUrl) {
+public class DiscuzUrl extends Url {
+    private static final Pattern mainThreadPattern = Pattern.compile("/thread-(\\d+)-1-(\\d+)");
+
+    public DiscuzUrl(String baseUrl) {
         super(baseUrl);
     }
 
@@ -16,8 +21,9 @@ public class Url extends cn.edu.sjtu.at15.forum.crawler.Url {
         return url.startsWith(baseUrl + "/thread-");
     }
 
-    public boolean isMainThread(String url){
-        return false;
+    public boolean isMainThread(String url) {
+        Matcher m = mainThreadPattern.matcher(url);
+        return m.find();
     }
 
     // FIXME: this only works for one url

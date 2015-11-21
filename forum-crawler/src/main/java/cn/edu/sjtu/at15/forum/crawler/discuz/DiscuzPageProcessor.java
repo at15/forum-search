@@ -6,22 +6,19 @@ import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
-
-import cn.edu.sjtu.at15.forum.common.entity.ForumThread;
 
 /**
  * Created by at15 on 15-11-19.
  */
 public class DiscuzPageProcessor implements PageProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(DiscuzPageProcessor.class);
-    private final Url url;
+    private final DiscuzUrl discuzUrl;
     private Site site;
 
     public DiscuzPageProcessor(String baseUrl) {
         site = Site.me().setRetryTimes(3).setSleepTime(1000);
-        url = new Url(baseUrl);
+        discuzUrl = new DiscuzUrl(baseUrl);
     }
 
     public Site getSite() {
@@ -33,13 +30,13 @@ public class DiscuzPageProcessor implements PageProcessor {
         String html = page.getRawText();
         LOGGER.debug("processing page : " + currentUrl);
 
-        if (!url.isInnerLink(currentUrl)) {
+        if (!discuzUrl.isInnerLink(currentUrl)) {
             LOGGER.debug("ignore outer link : " + currentUrl);
             return;
         }
 
         // deal with thread
-        if (url.isThread(currentUrl)) {
+        if (discuzUrl.isThread(currentUrl)) {
             LOGGER.debug("processing thread");
             // TODO: there are threads and thread comments (sub thread), should be treated differently
             // put the logic in parseThread
@@ -64,7 +61,7 @@ public class DiscuzPageProcessor implements PageProcessor {
         // this is other type of pages, we just simply add all inner links
         for (String link : page.getHtml().links().all()) {
             // ignore outer link
-            if (!url.isInnerLink(link)) {
+            if (!discuzUrl.isInnerLink(link)) {
                 continue;
             }
             LOGGER.debug(link);
