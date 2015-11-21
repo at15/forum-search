@@ -25,7 +25,7 @@ public class DiscuzUrl extends Url {
             return false;
         }
         String page = m.group(2);
-        return page.equals("1");
+        return "1".equals(page);
     }
 
     public String getMainThreadUrl(String url) {
