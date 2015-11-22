@@ -15,6 +15,8 @@ import java.util.Map;
 
 /**
  * Created by gpl on 15/11/17.
+ *
+ * @TODO: remove this class
  */
 public class DiscuzThreadTokenizer {
     private static final Logger LOGGER = LoggerFactory.getLogger(DiscuzThreadTokenizer.class);
