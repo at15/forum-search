@@ -46,6 +46,7 @@ public class TextRankTokenizer extends KeywordExtractor {
 
 
     // NOTE: the length of termList and return is not the same in most cases
+    // TODO: change shouldInclude and make the method static
     public LinkedHashMap<String, Float> getTermRank(List<Term> termList) {
         List<String> wordList = new ArrayList<String>();
         for (Term t : termList) {
