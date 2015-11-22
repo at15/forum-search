@@ -17,6 +17,4 @@ public class Tokenizer {
         return IndexTokenizer.segment(str);
     }
 
-
-
 }

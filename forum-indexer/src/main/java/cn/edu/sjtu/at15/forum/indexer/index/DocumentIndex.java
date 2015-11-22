@@ -1,4 +1,4 @@
-package cn.edu.sjtu.at15.forum.tokenizer.index;
+package cn.edu.sjtu.at15.forum.indexer.index;
 
 import java.util.List;
 
