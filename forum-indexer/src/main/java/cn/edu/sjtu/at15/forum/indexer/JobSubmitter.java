@@ -9,6 +9,8 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.mapreduce.lib.output.MultipleOutputs;
+import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,8 +53,15 @@ public class JobSubmitter {
             job.setReducerClass(ThreadReducer.class);
             job.setOutputKeyClass(Text.class);
             job.setOutputValueClass(Text.class);
+
+            job.setOutputFormatClass(TextOutputFormat.class);
+
             FileInputFormat.addInputPath(job, new Path(inputPath));
             FileOutputFormat.setOutputPath(job, new Path(outputPath));
+
+            MultipleOutputs.addNamedOutput(job, "term", TextOutputFormat.class,
+                    Text.class, Text.class);
+
             job.waitForCompletion(true);
         } catch (IOException ex) {
             LOGGER.error("got io exception for job", ex);
