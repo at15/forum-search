@@ -1,6 +1,7 @@
 package cn.edu.sjtu.at15.forum.indexer.index;
 
 import cn.edu.sjtu.at15.forum.common.entity.TermPosition;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +10,11 @@ import java.util.List;
  * Created by at15 on 15-11-22.
  */
 public class DocumentIndex {
+    @JsonProperty("u")
     private String url;
+    @JsonProperty("r")
     private Float rank;
+    @JsonProperty("p")
     private List<TermPosition> positions;
 
     public DocumentIndex() {

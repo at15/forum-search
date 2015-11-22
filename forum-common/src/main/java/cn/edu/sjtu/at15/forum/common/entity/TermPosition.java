@@ -1,12 +1,15 @@
 package cn.edu.sjtu.at15.forum.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Created by at15 on 15-11-22.
  */
 public class TermPosition {
+    @JsonProperty("p")
     public Integer postIndex;
+    @JsonProperty("o")
     public Integer offset;
     @JsonIgnore
     public static final Integer TITLE = -1;

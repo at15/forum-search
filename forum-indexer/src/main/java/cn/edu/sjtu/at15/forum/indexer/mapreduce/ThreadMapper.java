@@ -27,7 +27,7 @@ public class ThreadMapper extends
     private Text valueVal = new Text();
 
     // TODO: map should also store the tokenize result for document in hdfs
-    public void map(Object ignore, Text value, Context context
+    public void map(Object key, Text value, Context context
     ) throws IOException, InterruptedException {
         String json = value.toString();
         LOGGER.debug(json);
@@ -35,19 +35,24 @@ public class ThreadMapper extends
         FileSplit fileSplit = (FileSplit) context.getInputSplit();
         String fileName = fileSplit.getPath().getName();
         Map<String, DocumentIndex> indexMap = new HashMap<String, DocumentIndex>();
-        if (fileName.startsWith("main")) {
-            ForumMainThread forumMainThread = mapper.readValue(json, ForumMainThread.class);
-            indexMap = ThreadIndexer.processDocument(forumMainThread);
+        try {
+            if (fileName.startsWith("main")) {
+                ForumMainThread forumMainThread = mapper.readValue(json, ForumMainThread.class);
+                indexMap = ThreadIndexer.processDocument(forumMainThread);
+            }
+            if (fileName.startsWith("sub")) {
+                ForumThread forumThread = mapper.readValue(json, ForumThread.class);
+                indexMap = ThreadIndexer.processDocument(forumThread);
+            }
+            // loop through the map and output
+            for (Map.Entry<String, DocumentIndex> entry : indexMap.entrySet()) {
+                keyVal.set(entry.getKey());
+                valueVal.set(mapper.writeValueAsString(entry.getValue()));
+                context.write(keyVal, valueVal);
+            }
+        } catch (IOException ignore) {
+            // ignore wrong format json
         }
-        if (fileName.startsWith("sub")) {
-            ForumThread forumThread = mapper.readValue(json, ForumThread.class);
-            indexMap = ThreadIndexer.processDocument(forumThread);
-        }
-        // loop through the map and output
-        for (Map.Entry<String, DocumentIndex> entry : indexMap.entrySet()) {
-            keyVal.set(entry.getKey());
-            valueVal.set(mapper.writeValueAsString(entry.getValue()));
-            context.write(keyVal, valueVal);
-        }
+
     }
 }
