@@ -19,13 +19,13 @@ import java.util.ListIterator;
  * Created by at15 on 15-11-22.
  */
 public class Tokenizer {
-    public List<Term> segment(String str) {
+    public static List<Term> segment(String str) {
         // IndexTokenizer handles long text
         // ie: 主副食品 -> 主副食品, 副食品, 食品
         return IndexTokenizer.segment(str);
     }
 
-    public List<TermWithPosition> tokenize(ForumThread thread) {
+    public static List<TermWithPosition> tokenize(ForumThread thread) {
         List<TermWithPosition> termWithPositionList = new ArrayList<TermWithPosition>();
         List<TermWithRank> termWithRankList;
         Float titleWeight = 5.0f;

@@ -9,7 +9,12 @@ public class ForumMainThread extends ForumThread {
     protected Integer viewCount;
     protected Integer replyCount;
 
-    public ForumMainThread(ForumThread thread){
+    // must have a empty constructor in order deserialize from json
+    public ForumMainThread() {
+
+    }
+
+    public ForumMainThread(ForumThread thread) {
         setUrl(thread.getUrl());
         setTitle(thread.getTitle());
         setPosts(thread.getPosts());

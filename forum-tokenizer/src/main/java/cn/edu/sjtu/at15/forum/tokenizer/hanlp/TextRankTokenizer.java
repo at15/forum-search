@@ -40,7 +40,7 @@ public class TextRankTokenizer extends KeywordExtractor {
             }
             termWithRankList.add(new TermWithRank(t, rank));
         }
-        System.out.println(termWithRankList);
+//        System.out.println(termWithRankList);
         return termWithRankList;
     }
 
@@ -54,7 +54,7 @@ public class TextRankTokenizer extends KeywordExtractor {
                 wordList.add(t.word);
             }
         }
-        System.out.println(wordList);
+//        System.out.println(wordList);
         Map<String, Set<String>> words = new TreeMap<String, Set<String>>();
         Queue<String> que = new LinkedList<String>();
         for (String w : wordList) {
