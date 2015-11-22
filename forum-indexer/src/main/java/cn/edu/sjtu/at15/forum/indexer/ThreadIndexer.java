@@ -48,7 +48,7 @@ public class ThreadIndexer {
         try {
             Job job = Job.getInstance(conf, "thread indexer");
             job.setJarByClass(ThreadIndexer.class);
-            job.setMapperClass(ThreadTokenizeMapper.class);
+//            job.setMapperClass(ThreadTokenizeMapper.class);
             job.setReducerClass(ThreadReducer.class);
             job.setOutputKeyClass(Text.class);
             job.setOutputValueClass(Text.class);

@@ -1,5 +1,6 @@
 package cn.edu.sjtu.at15.forum.indexer.index;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,6 +10,10 @@ public class InvertedIndex {
     private String term;
     private Integer count;
     private List<DocumentIndex> documents;
+
+    public InvertedIndex() {
+        documents = new ArrayList<DocumentIndex>();
+    }
 
     public String getTerm() {
         return term;
@@ -33,4 +38,9 @@ public class InvertedIndex {
     public void setDocuments(List<DocumentIndex> documents) {
         this.documents = documents;
     }
+
+    public void addDocument(DocumentIndex documentIndex) {
+        documents.add(documentIndex);
+    }
+
 }

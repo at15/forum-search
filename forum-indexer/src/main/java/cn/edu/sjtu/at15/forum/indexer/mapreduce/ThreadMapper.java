@@ -21,13 +21,13 @@ public class ThreadMapper extends
     private Text keyVal = new Text();
     private Text valueVal = new Text();
 
+    // TODO: map should also store the tokenize result for document in hdfs
     public void map(Object ignore, Text value, Context context
     ) throws IOException, InterruptedException {
         String json = value.toString();
         // see if this is a main thread or sub thread
         FileSplit fileSplit = (FileSplit) context.getInputSplit();
         String fileName = fileSplit.getPath().getName();
-        // TODO: this cant not be tested using mrunit now I guess, it does not support fileSplit?
         Map<String, DocumentIndex> indexMap = new HashMap<String, DocumentIndex>();
         if (fileName.startsWith("main")) {
             ForumMainThread forumMainThread = mapper.readValue(json, ForumMainThread.class);
