@@ -4,7 +4,8 @@ import cn.edu.sjtu.at15.forum.indexer.index.DocumentIndex;
 import cn.edu.sjtu.at15.forum.indexer.index.InvertedIndex;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
-import org.apache.htrace.fasterxml.jackson.databind.ObjectMapper;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 

@@ -2,7 +2,6 @@ package cn.edu.sjtu.at15.forum.indexer.mapreduce;
 
 import cn.edu.sjtu.at15.forum.common.entity.ForumThread;
 import cn.edu.sjtu.at15.forum.indexer.index.DocumentIndex;
-import cn.edu.sjtu.at15.forum.indexer.index.InvertedIndex;
 import cn.edu.sjtu.at15.forum.tokenizer.TermWithPosition;
 import cn.edu.sjtu.at15.forum.tokenizer.Tokenizer;
 

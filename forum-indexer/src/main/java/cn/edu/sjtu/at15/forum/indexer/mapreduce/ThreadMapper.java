@@ -6,7 +6,9 @@ import cn.edu.sjtu.at15.forum.indexer.index.DocumentIndex;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
-import org.apache.htrace.fasterxml.jackson.databind.ObjectMapper;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
