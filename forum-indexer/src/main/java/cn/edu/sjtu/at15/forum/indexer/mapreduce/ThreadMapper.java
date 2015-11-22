@@ -7,6 +7,8 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.apache.htrace.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,6 +19,7 @@ import java.util.Map;
  */
 public class ThreadMapper extends
         Mapper<Object, Text, Text, Text> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ThreadMapper.class);
     private static final ObjectMapper mapper = new ObjectMapper();
     private Text keyVal = new Text();
     private Text valueVal = new Text();
@@ -25,6 +28,7 @@ public class ThreadMapper extends
     public void map(Object ignore, Text value, Context context
     ) throws IOException, InterruptedException {
         String json = value.toString();
+        LOGGER.debug(json);
         // see if this is a main thread or sub thread
         FileSplit fileSplit = (FileSplit) context.getInputSplit();
         String fileName = fileSplit.getPath().getName();
