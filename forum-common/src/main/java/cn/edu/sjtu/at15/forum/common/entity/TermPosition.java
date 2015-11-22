@@ -13,7 +13,7 @@ public class TermPosition {
         this.offset = offset;
     }
 
-    public boolean isTitle(){
-        return postIndex == TITLE;
+    public boolean isTitle() {
+        return TITLE.equals(postIndex);
     }
 }

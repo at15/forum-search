@@ -1,7 +1,5 @@
 package cn.edu.sjtu.at15.forum.indexer;
 
-import cn.edu.sjtu.at15.forum.tokenizer.DiscuzThreadTokenizer;
-import cn.edu.sjtu.at15.forum.tokenizer.Token;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
@@ -15,17 +13,17 @@ public class ThreadTokenizeMapper extends
         Mapper<Object, Text, Text, Text> {
     private Text term = new Text();
     private Text info = new Text();
-    private DiscuzThreadTokenizer tokenizer = new DiscuzThreadTokenizer();
-
-    public void map(Object key, Text value, Context context
-    ) throws IOException, InterruptedException {
-        String json = value.toString();
-        List<Token> tokens = tokenizer.tokenizeThread(json);
-        for (Token token : tokens) {
-            // TODO: change url to real info, including rank, position, url
-            term.set(token.getTerm());
-            info.set(token.toInfo());
-            context.write(term, info);
-        }
-    }
+//    private DiscuzThreadTokenizer tokenizer = new DiscuzThreadTokenizer();
+//
+//    public void map(Object key, Text value, Context context
+//    ) throws IOException, InterruptedException {
+//        String json = value.toString();
+//        List<Token> tokens = tokenizer.tokenizeThread(json);
+//        for (Token token : tokens) {
+//            // TODO: change url to real info, including rank, position, url
+//            term.set(token.getTerm());
+//            info.set(token.toInfo());
+//            context.write(term, info);
+//        }
+//    }
 }

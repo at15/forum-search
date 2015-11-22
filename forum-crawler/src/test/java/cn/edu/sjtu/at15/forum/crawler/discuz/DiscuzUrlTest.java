@@ -46,7 +46,6 @@ public class DiscuzUrlTest {
         String p = "http://www.1point3acres.com/bbs/thread-147140-2-1.html";
         Pattern pattern = DiscuzUrl.threadUrlPattern;
         Matcher m = pattern.matcher(p);
-        StringBuffer sb = new StringBuffer();
         if (m.find()) {
             // try to replace the page number
 
