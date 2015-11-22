@@ -25,7 +25,6 @@ public class TextRankTokenizer extends KeywordExtractor {
     }
 
     public static List<TermWithRank> getTermAndRank(String document) {
-//    public static Map<String, Float> getTermAndRank(String document) {
         TextRankTokenizer textRankTokenizer = new TextRankTokenizer();
         List<Term> termList = IndexTokenizer.segment(document);
         List<TermWithRank> termWithRankList = new ArrayList<TermWithRank>();
@@ -44,13 +43,8 @@ public class TextRankTokenizer extends KeywordExtractor {
         return termWithRankList;
     }
 
-//    // This method does not wrap word using term
-//    // TODO: implement, better call it getKeyWordAndRank
-//    public Map<String, Float> getTermAndRankMap(List<Term> termList) {
-//        return new HashMap<String, Float>();
-//    }
 
-    // NOTE: the length of termList and return may not be same in most cases
+    // NOTE: the length of termList and return is not the same in most cases
     public LinkedHashMap<String, Float> getTermRank(List<Term> termList) {
         List<String> wordList = new ArrayList<String>();
         for (Term t : termList) {
@@ -115,7 +109,7 @@ public class TextRankTokenizer extends KeywordExtractor {
             entry = entryList.get(i);
             result.put(entry.getKey(), entry.getValue());
         }
-        System.out.println(result);
+//        System.out.println(result);
         return result;
     }
 
