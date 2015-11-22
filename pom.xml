@@ -19,6 +19,7 @@
         <module>forum-tokenizer</module>
         <module>forum-indexer</module>
         <module>forum-common</module>
+        <module>forum-search-api</module>
     </modules>
 
     <properties>
