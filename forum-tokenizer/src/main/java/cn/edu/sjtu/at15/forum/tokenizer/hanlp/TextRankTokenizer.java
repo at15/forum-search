@@ -24,6 +24,7 @@ public class TextRankTokenizer extends KeywordExtractor {
         getTermAndRank("有一个著名的程序员说程序员都喜欢写程序,而且所有程序员都喜欢养狗");
     }
 
+    // TODO: allow use other tokenizer, we are just using IndexTokenizer to get offset now
     public static List<TermWithRank> getTermAndRank(String document) {
         TextRankTokenizer textRankTokenizer = new TextRankTokenizer();
         List<Term> termList = IndexTokenizer.segment(document);

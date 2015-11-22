@@ -1,7 +1,6 @@
 package cn.edu.sjtu.at15.forum.tokenizer;
 
 import com.hankcs.hanlp.seg.common.Term;
-import com.hankcs.hanlp.summary.TextRankKeyword;
 import com.hankcs.hanlp.tokenizer.IndexTokenizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,9 +12,10 @@ import java.util.List;
  */
 public class Tokenizer {
     public List<Term> segment(String str) {
-//        TextRankKeyword.getKeywordList()
         // IndexTokenizer handles long text
         // ie: 主副食品 -> 主副食品, 副食品, 食品
         return IndexTokenizer.segment(str);
     }
+
+
 }

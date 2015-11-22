@@ -5,6 +5,8 @@ import com.hankcs.hanlp.seg.common.Term;
 
 /**
  * Created by at15 on 15-11-22.
+ *
+ * @TODO rank or score ...
  */
 public class TermWithRank extends Term {
     protected Float score;
@@ -23,11 +25,19 @@ public class TermWithRank extends Term {
         this.score = score;
     }
 
-    public Float getScore() {
+    public String getWord() {
+        return word;
+    }
+
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public Float getRank() {
         return score;
     }
 
-    public void setScore(Float score) {
+    public void setRank(Float score) {
         this.score = score;
     }
 
