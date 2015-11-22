@@ -30,4 +30,9 @@ public class TermWithRank extends Term {
     public void setScore(Float score) {
         this.score = score;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " " + score;
+    }
 }

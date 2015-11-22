@@ -1,10 +1,8 @@
 package cn.edu.sjtu.at15.forum.tokenizer.hanlp;
 
-import com.hankcs.hanlp.corpus.synonym.Synonym;
 import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.summary.KeywordExtractor;
 import com.hankcs.hanlp.tokenizer.IndexTokenizer;
-import com.hankcs.hanlp.tokenizer.StandardTokenizer;
 
 import java.util.*;
 
@@ -26,21 +24,34 @@ public class TextRankTokenizer extends KeywordExtractor {
         getTermAndRank("有一个著名的程序员说程序员都喜欢写程序,而且所有程序员都喜欢养狗");
     }
 
-    //    public static List<TermWithRank> getTermAndRank(String document) {
-    public static Map<String, Float> getTermAndRank(String document) {
+    public static List<TermWithRank> getTermAndRank(String document) {
+//    public static Map<String, Float> getTermAndRank(String document) {
         TextRankTokenizer textRankTokenizer = new TextRankTokenizer();
-        // just use the index tokenizer now
-        return textRankTokenizer.getTermAndRank(IndexTokenizer.segment(document));
-//        return textRankTokenizer.getTermAndRank(StandardTokenizer.segment(document));
+        List<Term> termList = IndexTokenizer.segment(document);
+        List<TermWithRank> termWithRankList = new ArrayList<TermWithRank>();
+        LinkedHashMap<String, Float> termScores = textRankTokenizer.getTermRank(termList);
+        // merge the scores to the terms
+        Float rank;
+        for (Term t : termList) {
+            // if this term got no rank, it is zero
+            rank = 0.0f;
+            if (termScores.containsKey(t.word)) {
+                rank = termScores.get(t.word);
+            }
+            termWithRankList.add(new TermWithRank(t, rank));
+        }
+        System.out.println(termWithRankList);
+        return termWithRankList;
     }
 
-    // This method does not wrap word using term
-    // TODO: implement, better call it getKeyWordAndRank
-    public Map<String, Float> getTermAndRankMap(List<Term> termList) {
-        return new HashMap<String, Float>();
-    }
+//    // This method does not wrap word using term
+//    // TODO: implement, better call it getKeyWordAndRank
+//    public Map<String, Float> getTermAndRankMap(List<Term> termList) {
+//        return new HashMap<String, Float>();
+//    }
 
-    public LinkedHashMap<String, Float> getTermAndRank(List<Term> termList) {
+    // NOTE: the length of termList and return may not be same in most cases
+    public LinkedHashMap<String, Float> getTermRank(List<Term> termList) {
         List<String> wordList = new ArrayList<String>();
         for (Term t : termList) {
             if (shouldInclude(t)) {
@@ -96,15 +107,13 @@ public class TextRankTokenizer extends KeywordExtractor {
                 return o2.getValue().compareTo(o1.getValue());
             }
         });
-//        System.out.println(entryList);
+        // System.out.println(entryList);
         // must use linked HashMap to keep the order
         LinkedHashMap<String, Float> result = new LinkedHashMap<String, Float>();
-        Map.Entry<String, Float> r;
+        Map.Entry<String, Float> entry;
         for (int i = 0; i < entryList.size(); ++i) {
-//            System.out.println(entryList.get(i).getKey());
-//            System.out.println(entryList.get(i).getValue());
-            r = entryList.get(i);
-            result.put(r.getKey(), r.getValue());
+            entry = entryList.get(i);
+            result.put(entry.getKey(), entry.getValue());
         }
         System.out.println(result);
         return result;
