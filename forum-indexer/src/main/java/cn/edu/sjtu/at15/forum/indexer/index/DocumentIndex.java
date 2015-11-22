@@ -1,5 +1,8 @@
 package cn.edu.sjtu.at15.forum.indexer.index;
 
+import cn.edu.sjtu.at15.forum.common.entity.TermPosition;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,7 +10,12 @@ import java.util.List;
  */
 public class DocumentIndex {
     private String url;
-    private List<Integer> postions;
+    private Float rank;
+    private List<TermPosition> positions;
+
+    public DocumentIndex() {
+        positions = new ArrayList<TermPosition>();
+    }
 
     public String getUrl() {
         return url;
@@ -17,11 +25,28 @@ public class DocumentIndex {
         this.url = url;
     }
 
-    public List<Integer> getPostions() {
-        return postions;
+    public List<TermPosition> getPositions() {
+        return positions;
     }
 
-    public void setPostions(List<Integer> postions) {
-        this.postions = postions;
+    public void setPositions(List<TermPosition> positions) {
+        this.positions = positions;
+    }
+
+    public void addPosition(TermPosition termPosition) {
+        positions.add(termPosition);
+    }
+
+    public Float getRank() {
+        return rank;
+    }
+
+    public void setRank(Float rank) {
+        this.rank = rank;
+    }
+
+    @Override
+    public String toString() {
+        return url + " " + rank + positions.toString();
     }
 }

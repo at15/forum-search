@@ -16,4 +16,9 @@ public class TermPosition {
     public boolean isTitle() {
         return TITLE.equals(postIndex);
     }
+
+    @Override
+    public String toString() {
+        return postIndex + "-" + offset;
+    }
 }
