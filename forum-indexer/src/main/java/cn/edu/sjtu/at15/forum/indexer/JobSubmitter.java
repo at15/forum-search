@@ -1,31 +1,30 @@
 package cn.edu.sjtu.at15.forum.indexer;
 
+import cn.edu.sjtu.at15.forum.indexer.mapreduce.ThreadMapper;
+import cn.edu.sjtu.at15.forum.indexer.mapreduce.ThreadReducer;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.StringTokenizer;
 
 /**
  * Created by gpl on 15/11/17.
  */
-public class ThreadIndexer {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ThreadIndexer.class);
+public class JobSubmitter {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JobSubmitter.class);
 
     public void runWordCount(String inputPath, String outputPath) {
         Configuration conf = new Configuration();
         try {
             Job job = Job.getInstance(conf, "thread indexer word count");
-            job.setJarByClass(ThreadIndexer.class);
+            job.setJarByClass(JobSubmitter.class);
             job.setMapperClass(WordCountTokenizerMapper.class);
             job.setCombinerClass(WordCountIntSumReducer.class);
             job.setReducerClass(WordCountIntSumReducer.class);
@@ -43,12 +42,12 @@ public class ThreadIndexer {
         }
     }
 
-    public void runThreadIndex(String inputPath, String outputPath) {
+    public void runIndexThread(String inputPath, String outputPath) {
         Configuration conf = new Configuration();
         try {
             Job job = Job.getInstance(conf, "thread indexer");
-            job.setJarByClass(ThreadIndexer.class);
-//            job.setMapperClass(ThreadTokenizeMapper.class);
+            job.setJarByClass(JobSubmitter.class);
+            job.setMapperClass(ThreadMapper.class);
             job.setReducerClass(ThreadReducer.class);
             job.setOutputKeyClass(Text.class);
             job.setOutputValueClass(Text.class);
@@ -65,7 +64,7 @@ public class ThreadIndexer {
     }
 
     public static void main(String[] args) throws Exception {
-        ThreadIndexer indexer = new ThreadIndexer();
-        indexer.runThreadIndex(args[0], args[1]);
+        JobSubmitter submitter = new JobSubmitter();
+        submitter.runIndexThread(args[0], args[1]);
     }
 }
