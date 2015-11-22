@@ -10,11 +10,16 @@ public class TermWithRank extends Term {
     protected Float score;
 
     public TermWithRank(String word, Nature nature) {
-        super(word, Nature.n);
+        super(word, nature);
     }
 
     public TermWithRank(String word, Nature nature, Float score) {
-        super(word, Nature.n);
+        super(word, nature);
+        this.score = score;
+    }
+
+    public TermWithRank(Term term, Float score) {
+        super(term.word, term.nature);
         this.score = score;
     }
 
