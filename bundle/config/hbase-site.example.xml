@@ -27,12 +27,12 @@
         <name>hbase.rootdir</name>
         <value>hdfs://localhost:9000/hbase</value>
     </property>
-    <property>
-        <name>hbase.zookeeper.property.dataDir</name>
-        <value>/Users/gpl/repos/data/zookeeper</value>
-    </property>
-    <property>
-        <name>hbase.cluster.distributed</name>
-        <value>true</value>
-    </property>
+    <!--<property>-->
+    <!--<name>hbase.zookeeper.property.dataDir</name>-->
+    <!--<value>/home/at15/workspace/data/zookeeper</value>-->
+    <!--</property>-->
+    <!--<property>-->
+    <!--<name>hbase.cluster.distributed</name>-->
+    <!--<value>true</value>-->
+    <!--</property>-->
 </configuration>
