@@ -17,3 +17,9 @@ data/*
 # bundle a hadoop, due to #2
 hadoop-2.7.1
 hadoop-2.7.1.tar.gz
+
+# bundle a hbase
+hbase*.tar.gz
+hbase-*
+
+# bundle a spark
